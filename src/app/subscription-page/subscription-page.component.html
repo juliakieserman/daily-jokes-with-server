@@ -1,0 +1,30 @@
+<form>
+    <section class="form-block">
+        <label>Subscribe to get jokes delivered to the comfort of your inbox</label>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input 
+              ngControl="email" 
+              type="text" 
+              name="email" 
+              [(ngModel)]="changeSubscription.email" 
+              id="email" 
+              placeholder="Enter your email" 
+              size="45"
+              required
+              pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+        </div>
+        <div class="form-group">
+            <label for="subscriptionType">Frequency of Emails:</label>
+            <div class="select">
+                <select required id="subscriptionType" [(ngModel)]="changeSubscription.subscriptionType" name="subscriptionType">
+                    <option>Daily</option>
+                    <option disabled>Weekly</option>
+                    <option disabled>Monthly</option>
+                    <option>No Emails</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="subscribe()">Submit</button>
+    </section>
+</form>

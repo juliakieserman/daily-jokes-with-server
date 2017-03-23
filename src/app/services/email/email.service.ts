@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFire } from 'angularfire2';
-import { Md5 } from 'ts-md5/dist/md5';
 import { SubscriptionObj } from '../../models/subscription-model';
 
 @Injectable()

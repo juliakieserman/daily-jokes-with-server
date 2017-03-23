@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { AboutPageComponent } from './about-page/about-page.component';
+import { SubscriptionPageComponent } from './subscription-page/subscription-page.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyAq3BR1axTBqeqdqHWbqF68bPShUOiML8Y",
@@ -23,7 +24,10 @@ export const firebaseConfig = {
 
 const appRoutes: Routes = [
   { path: 'home', component: HomePageComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full'}
+  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: 'about', component: AboutPageComponent },
+  { path: 'home/:date', component: HomePageComponent },
+  { path: 'subscriptions', component: SubscriptionPageComponent }
 ];
 
 @NgModule({
@@ -31,7 +35,8 @@ const appRoutes: Routes = [
     AppComponent,
     HomePageComponent,
     HeaderComponent,
-    AboutPageComponent
+    AboutPageComponent,
+    SubscriptionPageComponent
   ],
   imports: [
     BrowserModule,
