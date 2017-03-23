@@ -5,7 +5,6 @@ import { JokeObj } from '../models/joke-model';
 import { RatingObj } from '../models/rating-model';
 import { AssetService } from '../services/assets/asset.service';
 import { JokeService } from '../services/jokes/joke.service';
-import { SanitizeHtml, SanitizeResourceUrl, SanitizeScript, SanitizeStyle, SanitizeUrl } from 'ng2-sanitize';
 
 const MONTH_OBJ = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
