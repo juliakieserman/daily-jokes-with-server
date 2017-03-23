@@ -13,6 +13,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { SubscriptionPageComponent } from './subscription-page/subscription-page.component';
+import { JokesArchivePageComponent } from './jokes-archive-page/jokes-archive-page.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyAq3BR1axTBqeqdqHWbqF68bPShUOiML8Y",
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
     HomePageComponent,
     HeaderComponent,
     AboutPageComponent,
-    SubscriptionPageComponent
+    SubscriptionPageComponent,
+    JokesArchivePageComponent
   ],
   imports: [
     BrowserModule,

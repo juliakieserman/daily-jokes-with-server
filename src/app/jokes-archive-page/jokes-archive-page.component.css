@@ -1,0 +1,23 @@
+.date {
+    color: #43C0F6;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    margin-top: 15%;
+}
+
+.day {
+    font-size: 4em;
+}
+
+.title {
+    text-align: center;
+    font-size: 2em;
+    font-family: 'ostrich-sans-regular';
+}
+
+.center {
+    left:0; right:0;
+    top:0; bottom:0;
+	margin:auto;
+}
