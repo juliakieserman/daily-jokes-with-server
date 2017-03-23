@@ -44,7 +44,7 @@ var db = admin.database();*/
   };
 firebase.initializeApp(config);*/
 
-cron.schedule('* * * * *', function() {
+/*cron.schedule('* * * * *', function() {
   console.log("triggered");
   //dummy data
 const user = {name: 'Joe', pasta: 'Spaghetti'};
@@ -86,4 +86,4 @@ ref.once("value", function(snapshot) {
     console.log("in here");
     console.log(snapshot.val());*/
     
-});
+//});
