@@ -1,3 +1,31 @@
-<p>
-  home-page works!
-</p>
+<div class="container">
+  <div *ngIf="jokeToday">
+    <img src="../assets/skyline.svg">
+    <div class="row center">
+      <span class="header-text"> {{jokeToday.title}} </span>
+    </div>
+    <div class="row">
+      <div class="description-text" [innerHTML]="jokeToday.description"> </div>
+    </div>
+    
+    <div class="row" *ngIf="jokeToday.hasAsset">
+      <div *ngFor="let img of assets">
+        <img class="img-responsive img-center" [src]="img">
+      </div>
+    </div>
+
+    <div class="center">
+                <rating class="stars" [(ngModel)]="rate" [max]="max" [readonly]="isReadonly"
+                  (onHover)="hoverOver($event)" (onLeave)="resetStar()"
+                  [titles]="['one','two','three']">
+                </rating> 
+                <div style="font-family: 'ostrich-sans-rounded'" [hidden]="!submittedRating">
+                  <p> Thanks for the feedback! </p>
+                </div>
+                <div [hidden]="submittedRating">
+                  <button type="submit" class="btn btn-primary" (click)="submitRating()">Submit</button>
+                </div>
+              </div>
+              
+  </div>
+</div>

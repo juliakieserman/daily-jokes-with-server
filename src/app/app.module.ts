@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
 import { ClarityModule } from 'clarity-angular';
+import { RatingModule } from 'ng2-bootstrap/rating';
 
 /* ng components */
 import { AppComponent } from './app.component';
@@ -15,6 +16,9 @@ import { AboutPageComponent } from './about-page/about-page.component';
 import { SubscriptionPageComponent } from './subscription-page/subscription-page.component';
 import { JokesArchivePageComponent } from './jokes-archive-page/jokes-archive-page.component';
 
+/* directives */
+import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
+import { CreateJokePageComponent } from './create-joke-page/create-joke-page.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyAq3BR1axTBqeqdqHWbqF68bPShUOiML8Y",
@@ -40,7 +44,9 @@ const appRoutes: Routes = [
     HeaderComponent,
     AboutPageComponent,
     SubscriptionPageComponent,
-    JokesArchivePageComponent
+    JokesArchivePageComponent,
+    NgDropFilesDirective,
+    CreateJokePageComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +54,8 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes),
     ClarityModule.forRoot(),
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    RatingModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
