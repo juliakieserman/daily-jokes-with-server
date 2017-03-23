@@ -11,6 +11,7 @@ import { ClarityModule } from 'clarity-angular';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { AboutPageComponent } from './about-page/about-page.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyAq3BR1axTBqeqdqHWbqF68bPShUOiML8Y",
@@ -29,7 +30,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomePageComponent,
-    HeaderComponent
+    HeaderComponent,
+    AboutPageComponent
   ],
   imports: [
     BrowserModule,
