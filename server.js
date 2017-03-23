@@ -9,9 +9,11 @@ const forceSSL = function() {
         next();
     }
 }
+const api = require('./server/api');
 
 app.use(forceSSL());
 app.use(express.static(__dirname + '/dist'));
+app.use('api', api);
 
 //let angular handle the routing
 app.get('/*', function(req, res) {
