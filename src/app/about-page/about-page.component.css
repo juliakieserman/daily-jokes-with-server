@@ -1,0 +1,31 @@
+.center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header-text {
+    font-family: 'ostrich-sans-regular';
+    color: #43C0F6;
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: .5em;
+}
+
+.paragraph-text {
+    font-family: 'circle-gordita';
+    font-size: 1.5em;
+}
+
+.content {
+    margin-bottom: 1.5em;
+}
+
+.btn {
+    background-color: #F81B84;
+    border-color: #F81B84;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    background-color: #fdbada;
+}
