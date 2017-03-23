@@ -12,7 +12,7 @@ export class AssetService {
     private assets: FirebaseObjectObservable<any[]>;
     private IMAGES_FOLDER: string = 'images/';
 
-    constructor(af: AngularFire, @Inject(FirebaseApp) firebaseApp: firebase.app.App) {
+    constructor(af: AngularFire, @Inject(FirebaseApp) firebaseApp: any) {
         this._af = af;
         this.firebaseApp = firebaseApp;
     }
