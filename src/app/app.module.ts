@@ -2,12 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule, Routes } from '@angular/router';
+import { AngularFireModule } from 'angularfire2';
+import { ClarityModule } from 'clarity-angular';
 
 import { AppComponent } from './app.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
