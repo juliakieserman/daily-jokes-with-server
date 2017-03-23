@@ -1,3 +1,4 @@
+/* external modules */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -6,8 +7,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
 import { ClarityModule } from 'clarity-angular';
 
+/* ng components */
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { HeaderComponent } from './shared/header/header.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyAq3BR1axTBqeqdqHWbqF68bPShUOiML8Y",
@@ -25,7 +28,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent
+    HomePageComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
