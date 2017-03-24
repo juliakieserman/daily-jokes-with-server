@@ -9,8 +9,7 @@ const schedule = require('node-schedule');
 
 const auth = {
     auth: {
-        //api_key: process.env.MAILGUN_API_KEY,
-        api_key: "key-aa1fecf5c0fa298f77f60b63b76a9768",
+        api_key: process.env.MAILGUN_API_KEY,
         domain: "sandboxd7ba3dbd75e8434990cdd9d7e7346e96.mailgun.org"
     }
 }
@@ -127,6 +126,10 @@ var dailyJob = new CronJob({
 
 router.get('/', (req, res) => {
     console.log('api works');
+});
+
+router.get('/.well-known/acme-challenge/:content', function(req, res) {
+  res.send('I0uVX9V-Uu86lhR-_h1ODrFe60SkSultJwwIRckHPVM.mjxrtlhmsvZj-0TFue5HiGZN6-fhOQKJCw5AEZTXfys');
 });
 
 module.exports = router;
