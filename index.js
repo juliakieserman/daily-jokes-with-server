@@ -1,5 +1,10 @@
+function sayHello() {
+    console.log("hello there");
+}
 
-/* TESTER TESTER */
+sayHello();
+
+/* TESTER TESTER 
 var APP = {
   scheduleJob: function() {
     rule = '* * * * * ';
@@ -15,4 +20,4 @@ var APP = {
 
 (function() {
   APP.init();
-})();
+})();*/
