@@ -2,9 +2,17 @@ const express = require('express');
 const router = express.Router();
 
 /* mailgun dependencies & init */
-const api_key = process.env.MAILGUN_API_KEY;
-const domain = process.env.MAILGUN_DOMAIN;
-const mailgun = require('mailgun-js') ({apiKey: api_key, domain: domain});
+const nodemailer = require('nodemailer');
+const mg = require('nodemailer-mailgun-transport');
+
+const auth = {
+  auth: {
+    api_key: process.env.MAILGUN_API_KEY,
+    domain: process.env.MAILGUN_DOMAIN
+  }
+}
+
+var nodemailerMailgun = nodemailer.createTransport(mg(auth));
 /* end mailgun dependencies & init */
 
 /* template dependencies & init */
@@ -120,19 +128,21 @@ addZero = function(value) {
 
 router.get('/', (req, res) => {
     console.log('api works');
+    nodemailerMailgun.sendMail({
+  from: 'kieserman.julia@gmail.com',
+  to: 'kieserman.julia@gmail.com', // An array if you have multiple recipients.
+  subject: 'Hey you, awesome!',
+  html: '<b>Wow Big powerful letters</b>',
+  text: 'Mailgun rocks, pow pow!'
+}, function (err, info) {
+  if (err) {
+    console.log('Error: ' + err);
+  }
+  else {
+    console.log('Response: ' + info);
+  }
 });
-
-router.get('/test', (req, res) => {
-    var data = {
-      from: 'kieserman.julia@gmail.com',
-      to: 'kieserman.julia@gmail.com',
-      subject: 'Hello',
-      text: 'HELL YES IT WORKS'
-    };
-
-    mailgun.messages().send(data, function (error, body) {
-      console.log(body);
-    });
+    
 });
 
 /*router.get('/.well-known/acme-challenge/:content', function(req, res) {
