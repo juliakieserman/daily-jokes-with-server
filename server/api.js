@@ -45,27 +45,6 @@ addZero = function(value) {
 /* End functions to format today's date */
 
 /* function to send an email using gmail-send module */
-sp.transmissions.send({
-  options: {
-    sandbox: true
-  },
-  content: {
-    from: 'testing@' + process.env.SPARKPOST_SANDBOX_DOMAIN,
-    subject: 'booya',
-    html: '<html><body><p> Testing SparkPost </p></body></html>'
-  },
-  recipients: [
-    { address: 'kieserman.julia@gmail.com'}
-  ]
-})
-.then(data => {
-  console.log('success!');
-  console.log(data);
-})
-.catch(err => {
-  console.log('failed');
-  console.log(err);
-});
 
 /* monster cron job to send daily email */
 /*var dailyJob = new CronJob({
@@ -141,6 +120,27 @@ sp.transmissions.send({
 
 router.get('/', (req, res) => {
     console.log('api works');
+    sp.transmissions.send({
+  options: {
+    sandbox: true
+  },
+  content: {
+    from: 'testing@' + process.env.SPARKPOST_SANDBOX_DOMAIN,
+    subject: 'booya',
+    html: '<html><body><p> Testing SparkPost </p></body></html>'
+  },
+  recipients: [
+    { address: 'kieserman.julia@gmail.com'}
+  ]
+})
+.then(data => {
+  console.log('success!');
+  console.log(data);
+})
+.catch(err => {
+  console.log('failed');
+  console.log(err);
+});
 });
 
 /*router.get('/.well-known/acme-challenge/:content', function(req, res) {
