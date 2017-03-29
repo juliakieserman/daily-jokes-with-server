@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-/* sparkpost dependencies & init */
-const SparkPost = require('sparkpost');
-let sp = new SparkPost();
-//let sp = new SparkPost(process.env.SPARKPOST_API_KEY);
+/* mailgun dependencies & init */
+const api_key = process.env.MAILGUN_API_KEY;
+const domain = process.env.MAILGUN_DOMAIN;
+const mailgun = require('mailgun-js') ({apiKey: api_key, domain: domain});
 /* end mailgun dependencies & init */
 
 /* template dependencies & init */
@@ -120,27 +120,19 @@ addZero = function(value) {
 
 router.get('/', (req, res) => {
     console.log('api works');
-    sp.transmissions.send({
-  options: {
-    sandbox: true
-  },
-  content: {
-    from: 'testing@' + process.env.SPARKPOST_SANDBOX_DOMAIN,
-    subject: 'booya',
-    html: '<html><body><p> Testing SparkPost </p></body></html>'
-  },
-  recipients: [
-    { address: 'kieserman.julia@gmail.com'}
-  ]
-})
-.then(data => {
-  console.log('success!');
-  console.log(data);
-})
-.catch(err => {
-  console.log('failed');
-  console.log(err);
 });
+
+router.get('/test', (req, res) => {
+    var data = {
+      from: 'kieserman.julia@gmail.com',
+      to: 'kieserman.julia@gmail.com',
+      subject: 'Hello',
+      text: 'HELL YES IT WORKS'
+    };
+
+    mailgun.messages().send(data, function (error, body) {
+      console.log(body);
+    });
 });
 
 /*router.get('/.well-known/acme-challenge/:content', function(req, res) {

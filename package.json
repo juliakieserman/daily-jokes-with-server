@@ -38,6 +38,7 @@
     "express": "^4.15.2",
     "firebase": "^3.7.3",
     "lodash": "^4.17.4",
+    "mailgun-js": "^0.9.1",
     "mutationobserver-shim": "^0.3.2",
     "ng2-bootstrap": "^1.4.2",
     "ng2-datepicker": "^1.8.2",
