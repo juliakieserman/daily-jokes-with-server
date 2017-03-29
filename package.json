@@ -38,6 +38,7 @@
     "email-templates": "^2.5.4",
     "express": "^4.15.2",
     "firebase": "^3.7.3",
+    "firebase-admin": "^4.1.4",
     "lodash": "^4.17.4",
     "mailgun-js": "^0.9.1",
     "mutationobserver-shim": "^0.3.2",
