@@ -1,5 +1,5 @@
-const express = require('express');
-const app = express();
+var express = require('express');
+var app = express();
 
 /* mailgun dependencies & init */
 const nodemailer = require('nodemailer');
@@ -27,10 +27,10 @@ const api = require('./server/api');
 
 app.use(forceSSL());
 app.use(express.static(__dirname + '/dist'));
-app.use('api', api);
+//app.use('api', api);
 
 //let angular handle the routing
-app.get('/*', function(req, res) {
+app.get('/', function(req, res) {
     console.log('sending some mail');
         nodemailerMailgun.sendMail({
   from: 'kieserman.julia@gmail.com',

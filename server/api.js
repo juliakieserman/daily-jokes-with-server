@@ -1,20 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-/* mailgun dependencies & init */
-const nodemailer = require('nodemailer');
-const mg = require('nodemailer-mailgun-transport');
-
-const auth = {
-  auth: {
-    api_key: process.env.MAILGUN_API_KEY,
-    domain: process.env.MAILGUN_DOMAIN
-  }
-}
-
-var nodemailerMailgun = nodemailer.createTransport(mg(auth));
-/* end mailgun dependencies & init */
-
 /* template dependencies & init */
 const path = require('path');
 const EmailTemplate = require('email-templates').EmailTemplate;
@@ -128,21 +114,6 @@ addZero = function(value) {
 
 router.get('/', (req, res) => {
     console.log('api works');
-    nodemailerMailgun.sendMail({
-  from: 'kieserman.julia@gmail.com',
-  to: 'kieserman.julia@gmail.com', // An array if you have multiple recipients.
-  subject: 'Hey you, awesome!',
-  html: '<b>Wow Big powerful letters</b>',
-  text: 'Mailgun rocks, pow pow!'
-}, function (err, info) {
-  if (err) {
-    console.log('Error: ' + err);
-  }
-  else {
-    console.log('Response: ' + info);
-  }
-});
-    
 });
 
 /*router.get('/.well-known/acme-challenge/:content', function(req, res) {
