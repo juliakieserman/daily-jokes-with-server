@@ -29,6 +29,7 @@ app.use(forceSSL());
 app.use(express.static(__dirname + '/dist'));
 app.use('api', api);
 
+console.log('sending mail');
 nodemailerMailgun.sendMail({
   from: 'kieserman.julia@gmail.com',
   to: 'kieserman.julia@gmail.com', // An array if you have multiple recipients.
