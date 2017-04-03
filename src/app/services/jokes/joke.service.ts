@@ -42,6 +42,8 @@ export class JokeService {
   }
 
   public addDictEntry(dictObj: DictObj) {
+    const letter = dictObj.letter;
+    
     const databaseObj = this._af.database.object('/dictionary');
     databaseObj.push(dictObj);
   }

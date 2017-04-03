@@ -21,9 +21,10 @@ export class CreateJokePageComponent implements OnInit {
   private description: string;
   private date: DateModel;
   private options: DatePickerOptions;
-  private jokes: FirebaseListObservable<any[]>;
   private newJoke: JokeObj;
   private newDict: DictObj;
+  private _af: AngularFire;
+  private letterArray: FirebaseListObservable<any>;
 
   //file upload variables
   isDropZoneOver: boolean = false;
@@ -35,7 +36,8 @@ export class CreateJokePageComponent implements OnInit {
     private router: Router, 
     private jokeService: JokeService,
     private assetService: AssetService) { 
-    this.options = new DatePickerOptions();
+      this._af = af;
+      this.options = new DatePickerOptions();
   }
 
   ngOnInit() {
@@ -81,9 +83,10 @@ export class CreateJokePageComponent implements OnInit {
 
   /* TO-DO: reformat form for dynamic definitions */
   private addDictToDB() {
-    this.newDict.definition = this.newJoke.description.replace(/\n/g, "<br />");
+    this.newDict.definition = this.newDict.definition.replace(/\n/g, "<br />");
 
-    this.jokeService.addDictEntry(this.newDict);
+    this.letterArray = this._af.database.list('/dictionary/' + this.newDict.letter);
+    this.letterArray.push(this.newDict);
     this.router.navigate(['/dictionary']);
   }
   
