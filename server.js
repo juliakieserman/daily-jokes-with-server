@@ -27,12 +27,9 @@ const api = require('./server/api');
 
 app.use(forceSSL());
 app.use(express.static(__dirname + '/dist'));
-//app.use('api', api);
+app.use('api', api);
 
-//let angular handle the routing
-app.get('/', function(req, res) {
-    console.log('sending some mail');
-        nodemailerMailgun.sendMail({
+nodemailerMailgun.sendMail({
   from: 'kieserman.julia@gmail.com',
   to: 'kieserman.julia@gmail.com', // An array if you have multiple recipients.
   subject: 'Hey you, awesome!',
@@ -46,7 +43,12 @@ app.get('/', function(req, res) {
     console.log('Response: ' + info);
   }
 });
+
+//let angular handle the routing
+app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 8080, function() {
+    console.log('listening');
+});
