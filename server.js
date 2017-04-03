@@ -30,19 +30,19 @@ app.use(express.static(__dirname + '/dist'));
 app.use('api', api);
 
 console.log('sending mail');
-nodemailerMailgun.sendMail({
-  from: 'kieserman.julia@gmail.com',
-  to: 'kieserman.julia@gmail.com', // An array if you have multiple recipients.
-  subject: 'Hey you, awesome!',
-  html: '<b>Wow Big powerful letters</b>',
-  text: 'Mailgun rocks, pow pow!'
-}, function (err, info) {
-  if (err) {
-    console.log('Error: ' + err);
-  }
-  else {
-    console.log('Response: ' + info);
-  }
+var transporter = Email.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    auth: {
+        api_key: process.env.MAILGUN_API_KEY,
+        domain: process.env.MAILGUN_DOMAIN
+    }
+});
+transporter.sendMail({
+    from: 'kieserman.julia@gmail.com',
+    to: 'kieserman.julia@gmail.com',
+    subject: 'test nodemailer',
+    text: 'test works!'
 });
 
 //let angular handle the routing
