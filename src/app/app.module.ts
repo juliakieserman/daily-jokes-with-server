@@ -19,6 +19,7 @@ import { JokesArchivePageComponent } from './jokes-archive-page/jokes-archive-pa
 /* directives */
 import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 import { CreateJokePageComponent } from './create-joke-page/create-joke-page.component';
+import { DictionaryPageComponent } from './dictionary-page/dictionary-page.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyAq3BR1axTBqeqdqHWbqF68bPShUOiML8Y",
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
   { path: 'about', component: AboutPageComponent },
   { path: 'home/:date', component: HomePageComponent },
   { path: 'subscriptions', component: SubscriptionPageComponent },
-  { path: 'archives', component: JokesArchivePageComponent }
+  { path: 'archives', component: JokesArchivePageComponent },
+  { path: 'dictionary', component: DictionaryPageComponent }
 ];
 
 @NgModule({
@@ -46,7 +48,8 @@ const appRoutes: Routes = [
     SubscriptionPageComponent,
     JokesArchivePageComponent,
     NgDropFilesDirective,
-    CreateJokePageComponent
+    CreateJokePageComponent,
+    DictionaryPageComponent
   ],
   imports: [
     BrowserModule,

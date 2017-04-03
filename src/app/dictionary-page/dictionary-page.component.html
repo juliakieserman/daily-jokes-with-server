@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div *ngFor="let letter of alphabet">
+        <button type="submit" class="btn btn-outline btn-circle" (click)="filterLetter(letter)">{{letter}}</button>
+      </div>
+    </div>
+  </div>
+</div>

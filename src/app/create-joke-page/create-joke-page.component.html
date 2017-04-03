@@ -27,11 +27,20 @@
 
     <div class="form-group">
         <label for="asset"> Has Assets? </label>
-            <select [(ngModel)]="newJoke.hasAsset" name="asset">
-  <option value=true>Yes </option>
-  <option selected value=false> No </option>
-</select>
-        </div>
+        <select [(ngModel)]="newJoke.hasAsset" name="asset">
+            <option value=true>Yes </option>
+            <option selected value=false> No </option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="dictionary"> Is Dictionary Entry? </label>
+        <select [(ngModel)]="newJoke.dictFlag" name="dictionary">
+            <option value=true> Yes </option>
+            <option selected value="false"> No </option>
+        </select>
+    </div>
+
 
     <button class="waves-effect waves-light btn" type="submit" (click)="addToDB()"> Submit </button>
 
