@@ -36,7 +36,8 @@ const appRoutes: Routes = [
   { path: 'home/:date', component: HomePageComponent },
   { path: 'subscriptions', component: SubscriptionPageComponent },
   { path: 'archives', component: JokesArchivePageComponent },
-  { path: 'dictionary', component: DictionaryPageComponent }
+  { path: 'dictionary', component: DictionaryPageComponent },
+  { path: 'create', component: CreateJokePageComponent }
 ];
 
 @NgModule({

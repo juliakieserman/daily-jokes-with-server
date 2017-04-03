@@ -4,6 +4,7 @@ import { AngularFire, FirebaseListObservable, FirebaseRef } from 'angularfire2';
 import { Router } from '@angular/router';
 import { JokeObj } from '../models/joke-model';
 import { AssetObj } from '../models/asset-model';
+import { DictObj } from '../models/dictionary-model';
 import { JokeService } from '../services/jokes/joke.service';
 import { AssetService } from '../services/assets/asset.service';
 import * as _ from 'lodash';
@@ -22,6 +23,7 @@ export class CreateJokePageComponent implements OnInit {
   private options: DatePickerOptions;
   private jokes: FirebaseListObservable<any[]>;
   private newJoke: JokeObj;
+  private newDict: DictObj;
 
   //file upload variables
   isDropZoneOver: boolean = false;
@@ -38,7 +40,10 @@ export class CreateJokePageComponent implements OnInit {
 
   ngOnInit() {
     this.newJoke = new JokeObj();
+    this.newDict = new DictObj();
   }
+
+  /* FUNCTIONS TO ADD NEW JOKE TO DATABSE */
 
   /* Start file upload functions */
   public fileOverDropZone(e: any) {
@@ -65,11 +70,21 @@ export class CreateJokePageComponent implements OnInit {
     });
   }
 
-  private addToDB() {
+  private addJokeToDB() {
     this.newJoke.description = this.newJoke.description.replace(/\n/g, "<br />");
 
     this.jokeService.addJoke(this.newJoke);
     this.router.navigate(['/home']);
   }
 
+  /* END OF FUNCTIONS TO ADD NEW JOKE TO DATABSE */
+
+  /* TO-DO: reformat form for dynamic definitions */
+  private addDictToDB() {
+    this.newDict.definition = this.newJoke.description.replace(/\n/g, "<br />");
+
+    this.jokeService.addDictEntry(this.newDict);
+    this.router.navigate(['/dictionary']);
+  }
+  
 }

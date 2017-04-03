@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { JokeObj } from '../../models/joke-model';
+import { DictObj } from '../../models/dictionary-model';
 import { AngularFire, FirebaseListObservable, FirebaseRef, FirebaseObjectObservable } from 'angularfire2';
 
 /* constants for date calculations */
@@ -38,6 +39,11 @@ export class JokeService {
     const date = jokeObj.date.toString();
     const databaseObj = this._af.database.object('/jokes');
     databaseObj.update({ [date]: jokeObj});
+  }
+
+  public addDictEntry(dictObj: DictObj) {
+    const databaseObj = this._af.database.object('/dictionary');
+    databaseObj.push(dictObj);
   }
 
   /* functions to calculate duration */
@@ -79,5 +85,6 @@ export class JokeService {
     
     return paddedValue;
   }
+  /* end of functions to calculate or format dates */
 
 }

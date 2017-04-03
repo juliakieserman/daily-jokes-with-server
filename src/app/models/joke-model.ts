@@ -5,5 +5,4 @@ export class JokeObj {
   count: number;
   hasAsset: boolean;
   assets: string[];
-  dictFlag: boolean;
 }
