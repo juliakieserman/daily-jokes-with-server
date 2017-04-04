@@ -22,6 +22,8 @@ const auth = {
 }
 
 var nodemailerMailgun = nodemailer.createTransport(mg(auth));
+console.log("auth");
+console.log(auth);
 /* end mailgun dependencies & init */
 
 const forceSSL = function() {
