@@ -16,8 +16,8 @@ const auth = {
 /* mailgun heroku credentials */
 const auth = {
   auth: {
-    api_key: process.env.MAILGUN_API_KEY,
-    domain: process.env.MAILGUN_DOMAIN
+    api_key: 'key-aa1fecf5c0fa298f77f60b63b76a9768',
+    domain: 'https://api.mailgun.net/v3/www.jokeonme.com'
   }
 }
 
