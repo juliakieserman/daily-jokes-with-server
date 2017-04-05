@@ -1,19 +1,17 @@
 var express = require('express');
 var app = express();
 
+/* server set-up */
+const api = require('./server/api');
+
+app.use(express.static(__dirname + '/dist'));
+app.use('api', api);
+/* end server set-up */
+
 /* mailgun dependencies & init */
 const nodemailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
 
-/* sandbox credentials: 
-const auth = {
-  auth: {
-    api_key: 'key-aa1fecf5c0fa298f77f60b63b76a9768',
-    domain: 'sandboxd7ba3dbd75e8434990cdd9d7e7346e96.mailgun.org'
-  }
-}*/
-
-/* mailgun heroku credentials */
 const auth = {
   auth: {
     api_key: 'key-aa1fecf5c0fa298f77f60b63b76a9768',
@@ -24,32 +22,74 @@ const auth = {
 var nodemailerMailgun = nodemailer.createTransport(mg(auth));
 /* end mailgun dependencies & init */
 
-/*const forceSSL = function() {
-    return function (req, res, next) {
-        if (req.headers['x-forwarded-proto'] !== 'https') {
-            return res.redirect(['https://', req.get('Host'), req.url].join(''));
-        }
-        next();
-    }
-}*/
-const api = require('./server/api');
+/* template dependencies & init */
+const path = require('path');
+const EmailTemplate = require('email-templates').EmailTemplate;
 
-//app.use(forceSSL());
-app.use(express.static(__dirname + '/dist'));
-app.use('api', api);
+var templateDir = path.join(__dirname, 'templates', 'daily-email');
+var dailyEmail = new EmailTemplate(templateDir);
+/* end template dependencies & init */
 
-nodemailerMailgun.sendMail({
-    from: 'kieserman.julia@gmail.com',
-    to: 'kieserman.julia@gmail.com',
-    subject: 'test nodemailer',
-    text: 'test works!'
-}, function(err, info) {
-    if (err) {
-        console.log('Error: ' + err);
-    } else {
-        console.log('Response: ' + info);
-    }
+/* firebase dependencies & init */
+var admin = require('firebase-admin');
+
+var serviceAccount = require('./serviceAccount.json');
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: 'https://jokes-website.firebaseio.com'
 });
+/* end firebase dependencies & init */
+
+/* Functions to format today's date */
+getDate = function() {
+  var date = new Date();
+  return date.getFullYear() + '-' + this.addZero(date.getMonth()+1) + '-' + this.addZero(date.getDate());
+}
+
+addZero = function(value) {
+  let paddedValue;
+    if (value < 10) {
+      paddedValue = '0' + value;
+    } else {
+      paddedValue = value;
+    }
+    return paddedValue
+}
+/* End functions to format today's date */
+
+const dateRef = getDate();
+var dailyJoke;
+//get joke
+db.ref('/jokes/' + dateRef).once('value').then(function(snapshot) {
+    dailyJoke = snapshot.val();
+    dailyEmail.render(dailyJoke, function(err, results) {
+        if (err) {
+            console.log('err creating email template, ' + err);
+        } else {
+            message = {
+                from: 'kieserman.julia@gmail.com',
+                to: 'kieserman.julia@gmail.com',
+                subject: 'Joke of the Day: ' + dateRef,
+                html: results.html,
+                text: results.text
+            };
+            nodemailerMailgun.sendMail(message, function(err, info) {
+                if (err) {
+                    console.log('Mailgun Error: ' + err);
+                } else {
+                    console.log('Email Response: ' + info);
+            }
+            });
+        }
+    })
+    
+}, function(error) {
+    console.log('Promise rejected');
+    console.log(error);
+});
+
+//Promise.all(asldfkjasl;dfj).then(values => )
+
 
 //let angular handle the routing
 app.get('/', function(req, res) {
