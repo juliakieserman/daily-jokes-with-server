@@ -54,11 +54,9 @@ addZero = function(value) {
 }
 /* End functions to format today's date */
 
-cron.schedule('* * * * *', function() {
-    console.log('running every minute');
-});
+cron.schedule('* * 18 * *', function() {
 
-/*const dateRef = getDate();
+const dateRef = getDate();
 var dailyJoke;
 //get joke
 db.ref('/jokes/' + dateRef).once('value').then(function(snapshot) {
@@ -87,7 +85,8 @@ db.ref('/jokes/' + dateRef).once('value').then(function(snapshot) {
 }, function(error) {
     console.log('Promise rejected');
     console.log(error);
-});*/
+}); //end joke retrieval
+}); //end cron schedule
 
 
 //let angular handle the routing
