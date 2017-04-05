@@ -51,14 +51,21 @@ addZero = function(value) {
 
 const dateRef = getDate();
 var dailyJoke;
-//get joke
+var dailyUsers = [];
 db.ref('/jokes/' + dateRef).once('value').then(function(snapshot) {
     dailyJoke = snapshot.val();
-    dailyEmail.render(dailyJoke, function(err, results) {
-        if (err) {
-            console.log('err creating email template, ' + err);
-        } else {
-            message = {
+    
+    db.ref('/emails').once('value').then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+            if (childSnapshot.val()['subscriptionType'] == 'Daily') {
+                dailyUsers.push(childSnapshot.val()['email']);
+            }
+        });
+        dailyEmail.render(dailyJoke, function(err, results) {
+            if (err) {
+                console.log('err creating email template, ' + err);
+            } else {
+             message = {
                 from: 'kieserman.julia@gmail.com',
                 to: 'kieserman.julia@gmail.com',
                 subject: 'Joke of the Day: ' + dateRef,
@@ -70,10 +77,11 @@ db.ref('/jokes/' + dateRef).once('value').then(function(snapshot) {
                     console.log('Mailgun Error: ' + err);
                 } else {
                     console.log('Email Response: ' + info);
+                }
+                });
             }
-            });
-        }
-    })
+        })
+    });
     
 }, function(error) {
     console.log('Promise rejected');
