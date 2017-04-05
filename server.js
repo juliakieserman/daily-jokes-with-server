@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var cron = require('node-cron');
 
 /* server set-up */
 const api = require('./server/api');
@@ -34,10 +35,6 @@ var dailyEmail = new EmailTemplate(templateDir);
 var admin = require('firebase-admin');
 var db = admin.database();
 var serviceAccount = require('./server/serviceAccount.json');
-/*admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: 'https://jokes-website.firebaseio.com'
-});*/
 /* end firebase dependencies & init */
 
 /* Functions to format today's date */
@@ -57,7 +54,11 @@ addZero = function(value) {
 }
 /* End functions to format today's date */
 
-const dateRef = getDate();
+cron.schedule('* * * * *', function() {
+    console.log('running every minute');
+});
+
+/*const dateRef = getDate();
 var dailyJoke;
 //get joke
 db.ref('/jokes/' + dateRef).once('value').then(function(snapshot) {
@@ -86,9 +87,7 @@ db.ref('/jokes/' + dateRef).once('value').then(function(snapshot) {
 }, function(error) {
     console.log('Promise rejected');
     console.log(error);
-});
-
-//Promise.all(asldfkjasl;dfj).then(values => )
+});*/
 
 
 //let angular handle the routing
