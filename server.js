@@ -32,12 +32,12 @@ var dailyEmail = new EmailTemplate(templateDir);
 
 /* firebase dependencies & init */
 var admin = require('firebase-admin');
-
-var serviceAccount = require('./serviceAccount.json');
-admin.initializeApp({
+var db = admin.database();
+var serviceAccount = require('./server/serviceAccount.json');
+/*admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: 'https://jokes-website.firebaseio.com'
-});
+});*/
 /* end firebase dependencies & init */
 
 /* Functions to format today's date */
