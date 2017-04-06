@@ -26,10 +26,10 @@ export class SubscriptionPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.changeSubscription = new SubscriptionObj();
   }
 
   subscribe() {
-    this.changeSubscription = new SubscriptionObj();
     let hash = Md5.hashStr(this.changeSubscription.email);
     this.emailService.addEmail(this.changeSubscription, hash);
     this.router.navigate(['/home']);
