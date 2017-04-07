@@ -1,6 +1,10 @@
 <div class="container">
 <div *ngIf="jokes">
   <div class="row">
+    <input class="pull-right" type="text" id="aForm_1" placeholder="Search..." size="45">
+    <clr-icon shape="search" size="12"></clr-icon>
+  </div>
+  <div class="row">
     <div class="col-lg-4 col-md-8 col-sm-12 col-xs-12" *ngFor="let joke of jokes | async" (click)="goToJoke(joke)">
       <div class="card">
         <div class="card-block">
