@@ -5,4 +5,5 @@ export class JokeObj {
   count: number;
   hasAsset: boolean;
   assets: string[];
+  reference: string;
 }

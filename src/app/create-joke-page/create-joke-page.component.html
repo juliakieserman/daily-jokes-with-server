@@ -1,6 +1,3 @@
-<p>
-  create-joke-page works!
-</p>
 <div class="container">
   <h1> New Joke Form </h1>
   <form>
@@ -23,6 +20,12 @@
       <label for="count"> Count </label>
       <input type="number" class="form-control" id="count" required [(ngModel)]="newJoke.count" name="count">
     </div>
+
+    <div class="form-group">
+      <label for="reference"> Reference </label>
+      <input type="text" class="form-control" id="reference" required [(ngModel)]="newJoke.reference" name="reference">
+    </div>
+
     <br>
 
     <div class="form-group">
