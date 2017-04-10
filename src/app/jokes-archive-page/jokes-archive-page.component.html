@@ -1,7 +1,19 @@
 <div class="container">
-<div *ngIf="jokes">
   <div class="row">
-    <div class="col-lg-4 col-md-8 col-sm-12 col-xs-12" *ngFor="let joke of jokes | async" (click)="goToJoke(joke)">
+    <input class="pull-right" type="text" [(ngModel)]="searchText" placeholder="Search..." (keyup)="filterSearch()" size="45">
+    <clr-icon shape="search" size="12"></clr-icon>
+  </div>
+  <div class="row">
+    <table class="table" *ngIf="searchList.length > 0">
+      <tbody>
+        <tr *ngFor="let joke of searchList" (click)="goToJoke(joke)" style="width: 25%">
+          <td class="searchText">{{joke.title}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row" *ngIf="jokeList.length > 0">
+    <div class="col-lg-4 col-md-8 col-sm-12 col-xs-12" *ngFor="let joke of jokeList" (click)="goToJoke(joke)">
       <div class="card">
         <div class="card-block">
           
@@ -22,5 +34,4 @@
       </div>
     </div>
   </div>
-</div>
 </div>

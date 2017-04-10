@@ -21,3 +21,19 @@
     top:0; bottom:0;
 	margin:auto;
 }
+
+.search-area {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.searchText {
+    font-family: 'ostrich-sans-regular';
+    font-size: 1.5em;
+}
+
+td:hover {
+    text-decoration: none;
+    background-color: #43C0F6;
+    color: white;
+}
