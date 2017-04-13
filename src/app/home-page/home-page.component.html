@@ -1,4 +1,5 @@
 <div class="container">
+  <div *ngIf="!jokeFlag">
   <div *ngIf="jokeToday">
     <img src="../assets/skyline.svg">
     <div class="row center">
@@ -27,5 +28,10 @@
                 </div>
               </div>
               
+  </div>
+  </div>
+  <div *ngIf="jokeFlag">
+    <h1> Uh oh! Looks like today's joke is still in the works. Hang tight! </h1>
+    <animated-404></animated-404>
   </div>
 </div>

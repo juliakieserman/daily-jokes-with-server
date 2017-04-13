@@ -1,0 +1,269 @@
+$accessory-front-color:  #ffc541;
+
+$backpack-strap: #9b462c;
+$backpack-strap-base: #aa512e;
+
+$bike-wheel-color: #b65c32;
+$bike-handle-color: #f9c358;
+$bike-handle-accent-color: #f4b73b;
+
+$four-back-color: #4e4066;
+$four-front-color: #6f5b92;
+
+$umbrella-handle-and-primary-accessory-color: #f78d5e;
+$umbrella-handle-and-accent-accessory-color: #fa976c;
+$umbrella-handle-and-dark-accessory-color: $bike-wheel-color;
+
+.wrapper {
+  width: 940px;
+}
+
+.cls-1 {
+  fill: $accessory-front-color;
+}
+
+.cls-2 {
+  fill: $four-back-color;
+}
+
+.cls-3 {
+  fill: $four-front-color;
+}
+
+.cls-4 {
+  fill: $umbrella-handle-and-primary-accessory-color;
+}
+
+.cls-5 {
+  fill: $umbrella-handle-and-accent-accessory-color;
+}
+
+.cls-6,
+.cls-7,
+.cls-8 {
+  fill: $umbrella-handle-and-dark-accessory-color;
+}
+
+.cls-10,
+.cls-6 {
+  opacity: .6;
+}
+
+.cls-7 {
+  opacity: .4;
+}
+
+.cls-9 {
+  fill: $bike-handle-accent-color;
+}
+
+.cls-11 {
+  fill: $bike-handle-color;
+}
+
+.cls-12 {
+  fill: $backpack-strap;
+}
+
+.cls-13 {
+  fill: $backpack-strap-base;
+}
+
+.cls-14 {
+  fill: $four-front-color;
+}
+
+
+// animations
+
+.wheel {
+  animation: wheel-rotate 6s ease infinite;
+  transform-origin: center;
+}
+
+@keyframes wheel-rotate {
+  50% {
+    animation-timing-function: cubic-bezier(.55, .085, .68, .53);
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(960deg);
+  }
+}
+
+.clock-hand-1 {
+  animation: clock-rotate 3s linear infinite;
+  transform-origin: bottom;
+}
+
+.clock-hand-2 {
+  animation: clock-rotate 6s linear infinite;
+  transform-origin: bottom;
+}
+
+@keyframes clock-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#box-top {
+  animation: box-top-animate 2s linear infinite;
+  transform-origin: right top;
+}
+
+@keyframes box-top-animate {
+  50% {
+    transform: rotate(-5deg);
+  }
+}
+
+#umbrella {
+  animation: umbrella-animate 6s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes umbrella-animate {
+  25% {
+    transform: translateY(10px) rotate(5deg);
+  }
+
+  75% {
+    transform: rotate(-5deg);
+  }
+}
+
+#cup {
+  animation: cup-rotate 3s cubic-bezier(.455, .03, .515, .955) infinite;
+  transform-origin: top left;
+}
+
+@keyframes cup-rotate {
+  50% {
+    transform: rotate(-5deg);
+  }
+}
+
+#pillow {
+  animation: pillow-animate 3s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes pillow-animate {
+  25% {
+    transform: rotate(10deg) translateY(5px);
+  }
+
+  75% {
+    transform: rotate(-10deg);
+  }
+}
+
+#stripe {
+  animation: stripe-animate 3s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes stripe-animate {
+  25% {
+    transform: translate(10px, 0) rotate(-10deg);
+  }
+
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+#bike {
+  animation: bike-animate 6s ease infinite;
+}
+
+@keyframes bike-animate {
+  0% {
+    transform: translateX(-1300px);
+  }
+
+  50% {
+    animation-timing-function: cubic-bezier(.47, 0, .745, .715);
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(1300px);
+  }
+}
+
+#rucksack {
+  animation: ruck-animate 3s linear infinite;
+  transform-origin: top;
+}
+
+@keyframes ruck-animate {
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+.circle {
+  animation: circle-animate ease infinite;
+  perspective: 0;
+  transform-origin: center;
+
+  .c1 {
+    animation-duration: 2s;
+  }
+
+  .c2 {
+    animation-duration: 3s;
+  }
+
+  .c3 {
+    animation-duration: 1s;
+  }
+
+  .c4 {
+    animation-duration: 1s;
+  }
+
+  .c5 {
+    animation-duration: 2s;
+  }
+
+  .c6 {
+    animation-duration: 3s;
+  }
+
+}
+
+@keyframes circle-animate {
+  50% {
+    transform: scale(.2) rotateX(360deg) rotateY(360deg);
+  }
+}
+
+.four,
+#ou {
+  animation: four-animate cubic-bezier(.39, .575, .565, 1) infinite;
+}
+
+.four.a {
+  animation-duration: 3s;
+  transform-origin: bottom left;
+}
+
+.four.b {
+  animation-duration: 3s;
+  transform-origin: bottom right;
+}
+
+#ou {
+  animation-duration: 6s;
+  transform-origin: center;
+}
+
+@keyframes four-animate {
+  50% {
+    transform: scale(.98);
+  }
+}

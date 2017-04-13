@@ -23,6 +23,7 @@ export class HomePageComponent implements OnInit {
   private sub: any;
   private passedData: string;
   private searchToday: string;
+  private jokeFlag: boolean = false;
 
   private load: boolean = false;
 
@@ -94,11 +95,14 @@ private loadDailyJoke(searchDate: string) {
 
     //get joke object and bind
     this.jokeService.getDailyJoke(searchDate).subscribe(data => {
-    this.jokeToday = data;
-    console.log(this.jokeToday);
-    if (this.jokeToday.hasAsset == true) {
-      this.assetHandler();
-
+      if (data.$value === null) {
+        this.jokeFlag = true;
+      }
+     
+      this.jokeToday = data;
+    
+      if (this.jokeToday.hasAsset == true) {
+        this.assetHandler();
       }
     });
 
