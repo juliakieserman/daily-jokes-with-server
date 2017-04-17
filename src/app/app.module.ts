@@ -16,7 +16,6 @@ import { HeaderComponent } from './shared/header/header.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { SubscriptionPageComponent } from './subscription-page/subscription-page.component';
 import { JokesArchivePageComponent } from './jokes-archive-page/jokes-archive-page.component';
-import { Animated404Component } from './animated404/animated404.component';
 
 /* directives */
 import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
@@ -49,8 +48,7 @@ const appRoutes: Routes = [
     SubscriptionPageComponent,
     JokesArchivePageComponent,
     NgDropFilesDirective,
-    CreateJokePageComponent,
-    Animated404Component
+    CreateJokePageComponent
   ],
   imports: [
     BrowserModule,
