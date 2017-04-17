@@ -3,10 +3,10 @@ const router = express.Router();
 
 /* template dependencies & init */
 const path = require('path');
-const EmailTemplate = require('email-templates').EmailTemplate;
+//const EmailTemplate = require('email-templates').EmailTemplate;
 
 var templateDir = path.join(__dirname, 'templates', 'daily-email');
-var dailyEmail = new EmailTemplate(templateDir);
+//var dailyEmail = new EmailTemplate(templateDir);
 /* end template dependencies & init */
 
 /* firebase dependencies & init */

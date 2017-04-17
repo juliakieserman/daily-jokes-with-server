@@ -41,11 +41,8 @@ export class JokeService {
     databaseObj.update({ [date]: jokeObj});
   }
 
-  public addDictEntry(dictObj: DictObj) {
-    const letter = dictObj.letter;
-    
-    const databaseObj = this._af.database.object('/dictionary');
-    databaseObj.push(dictObj);
+  public getDictionaryGroup(letter: string) {
+    return this._af.database.list('/dictionary/' + letter);
   }
 
   /* functions to calculate duration */

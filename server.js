@@ -1,8 +1,8 @@
-var express = require('express');
-var app = express();
+/*var express = require('express');
+var app = express();*/
 
 /* mailgun dependencies & init */
-const nodemailer = require('nodemailer');
+/*const nodemailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
 
 const auth = {
@@ -15,7 +15,7 @@ const auth = {
 var nodemailerMailgun = nodemailer.createTransport(mg(auth));
 /* end mailgun dependencies & init */
 
-const forceSSL = function() {
+/*const forceSSL = function() {
     return function (req, res, next) {
         if (req.headers['x-forwarded-proto'] !== 'https') {
             return res.redirect(['https://', req.get('Host'), req.url].join(''));
@@ -49,4 +49,4 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 8080);*/

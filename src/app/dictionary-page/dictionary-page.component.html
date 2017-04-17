@@ -6,4 +6,26 @@
       </div>
     </div>
   </div>
+
+  <div class="card">
+    <div class="card-header">
+
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th> Word </th>
+        <th> Type </th>
+        <th> Synonymous </th>
+      </tr>
+    </thead>
+    <tbody  *ngFor="let item of entries | async" (click)="switchFeature(item)">
+      <tr>
+        <th> {{item.word}} </th>
+        <th> {{item.definition}} </th>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
