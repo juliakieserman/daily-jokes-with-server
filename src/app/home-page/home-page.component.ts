@@ -76,6 +76,17 @@ export class HomePageComponent implements OnInit {
     var month = MONTH_OBJ[mm-1];
     var yyyy = today.getFullYear();
 
+    //no jokes on saturdays
+    if (today.getDay() === 6) {
+      var yesterday = new Date();
+      yesterday.setDate(today.getDate() - 1);
+      today = yesterday;
+    } else if (today.getDay() === 7) {
+      var yesterday = new Date();
+      yesterday.setDate(today.getDate() - 2);
+      today = yesterday;
+    }
+
     // format dates to search database and display on page
     this.todayDisplay = month + ' ' + dd + ', ' + yyyy;
     return this.jokeService.formatDate(today);
