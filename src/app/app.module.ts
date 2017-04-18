@@ -57,7 +57,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, {useHash:true}),
     ClarityModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
-    RatingModule.forRoot(),
+    RatingModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
