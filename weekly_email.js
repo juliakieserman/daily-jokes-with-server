@@ -16,8 +16,8 @@ var nodemailerMailgun = nodemailer.createTransport(mg(auth));
 const path = require('path');
 const EmailTemplate = require('email-templates').EmailTemplate;
 
-var templateDir = path.join(__dirname, 'templates', 'daily-email');
-var dailyEmail = new EmailTemplate(templateDir);
+var templateDir = path.join(__dirname, 'templates', 'weekly-email');
+var weeklyEmail = new EmailTemplate(templateDir);
 /* end template dependencies & init */
 
 /* firebase dependencies & init */
@@ -45,7 +45,26 @@ db.ref('/jokes').limitToLast(5).once('value').then(function(snapshot) {
                 weeklyUsers.push(childSnapshot.val()['email']);
             }
         });
-        //render the email here
+        weeklyEmail.render(weeklyJokes, function(err, results) {
+            if (err) {
+                console.log('err creating email template, ' + err);
+            } else {
+                message = {
+                    from: 'kieserman.julia@gmail.com',
+                    to: 'jbk67@georgetown.edu',
+                    subject: 'Weekly Joke Review',
+                    html: results.html,
+                    text: results.txt
+                };
+                nodemailerMailgun.sendMail(message, function(err, info) {
+                if (err) {
+                    console.log('Mailgun Error: ' + err);
+                } else {
+                    console.log('Email Response: ' + info);
+                }
+                });
+            }
+        })
     })
 
 });
