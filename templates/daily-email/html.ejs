@@ -1,8 +1,16 @@
-<img src="../src/assets/skyline.svg">
-<h1><a href='https://jokes-website.herokuapp.com' >href=<%-title %></a></h1>
-<h2><%- description%></h2>
-<h3><%- date%></h3>
+<header>
+    <% include ../partials/header %>
+</header>
+
+<main>
+    <h1><%-title %></h1>
+    <h2><%- description%></h2>
+    <h3><%- date%></h3>
+    <div style="text-align: center">
+        <a href='https://jokes-website.herokuapp.com'> view in browser </a>
+    </div>
+</main>
+
 <footer>
-    Jokes On Me 
-    &copy;Julia Kieserman 2017
+    <% include ../partials/footer %>
 </footer>
