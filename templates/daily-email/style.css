@@ -1,13 +1,14 @@
 h1 {
   color: #F81B84;
   text-align: center;
-  font-family: 'ostrich-sans-rounded';
+  font-family: 'Geneva';
   font-weight: bold;
 }
 
 h2 {
   text-align: center;
-  font-family: 'cicle-gordita';
+  font-family: 'georgia';
+  font-weight: lighter;
 }
 
 h3 {
@@ -16,6 +17,7 @@ h3 {
   font-family: 'cicle-gordita';
 }
 
-a {
-  text-align: center;
+footer {
+  background-color: #FDB813;
+  color: white;
 }

@@ -46,6 +46,11 @@ addZero = function(value) {
     }
     return paddedValue
 }
+
+prettifyDate = function(date) {
+    console.log(date);
+
+}
 /* End functions to format today's date */
 
 
@@ -54,7 +59,8 @@ var dailyJoke;
 var dailyUsers = [];
 db.ref('/jokes/' + dateRef).once('value').then(function(snapshot) {
     dailyJoke = snapshot.val();
-    
+    dailyJoke.date = prettifyDate(dailyJoke.date);
+
     db.ref('/emails').once('value').then(function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
             if (childSnapshot.val()['subscriptionType'] == 'Daily') {
@@ -67,7 +73,7 @@ db.ref('/jokes/' + dateRef).once('value').then(function(snapshot) {
             } else {
              message = {
                 from: 'kieserman.julia@gmail.com',
-                to: dailyUsers,
+                to: 'kieserman.julia@gmail.com',
                 subject: 'Joke of the Day: ' + dateRef,
                 html: results.html,
                 text: results.text
