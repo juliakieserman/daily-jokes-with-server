@@ -90,26 +90,31 @@ export class CreateJokePageComponent implements OnInit {
     let summary = {
       day1: {
         "jokeTitle": '',
+        "date": '',
         "reference" : this.reference1,
         "description" : this.description1
       },
       day2: {
         "jokeTitle": '',
+        "date": '',
         "reference" : this.reference2,
         "description" : this.description2
       },
       day3: {
         "jokeTitle": '',
+        "date": '',
         "reference" : this.reference3,
         "description" : this.description3
       },
       day4: {
         "jokeTitle": '',
+        "date": '',
         "reference" : this.reference4,
         "description" : this.description4
       },
       day5: {
         "jokeTitle": '',
+        "date": '',
         "reference" : this.reference5,
         "description" : this.description5
       }};

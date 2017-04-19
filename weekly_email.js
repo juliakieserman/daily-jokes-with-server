@@ -34,8 +34,10 @@ var weeklySummary;
 var weeklyUsers = [];
 //get last week's jokes
 db.ref('/weeklysummary').limitToLast(1).once('value').then(function(snapshot) {
-    weeklySummary = snapshot.val();
-    //console.log(weeklySummary);
+    snapshot.forEach(function(childSnapshot) {
+        weeklySummary = childSnapshot.val();
+    });
+
     //get weekly email users
     db.ref('/emails').once('value').then(function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
@@ -50,7 +52,7 @@ db.ref('/weeklysummary').limitToLast(1).once('value').then(function(snapshot) {
                 message = {
                     from: 'kieserman.julia@gmail.com',
                     to: 'jbk67@georgetown.edu',
-                    subject: 'Weekly Joke Review',
+                    subject: 'Your Week in Jokes',
                     html: results.html,
                     text: results.txt
                 };

@@ -82,6 +82,10 @@ export class JokeService {
 
   addWeeklySummary(weeklyObj) {
     //get last 5 jokes from database
+    const databaseObj = this._af.database.object('/weeklysummary');
+    let weekOf;
+
+
     let iterator = 1;
     const weekOfJokes = this._af.database.list('/jokes', {
       query: {
@@ -89,11 +93,15 @@ export class JokeService {
       }
     }).subscribe(jokes => {
       jokes.forEach(joke => {
+        if (iterator == 1) {
+          weekOf = joke.date;
+        }
         const accessor = 'day' + iterator;
         weeklyObj[accessor].jokeTitle = joke.title;
+        weeklyObj[accessor].date = joke.date;
         iterator++;
       });
-      this._af.database.list('/weeklysummary').push(weeklyObj);
+      databaseObj.update({ [weekOf]: weeklyObj});
     });
   }
 
