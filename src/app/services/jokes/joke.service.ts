@@ -28,6 +28,14 @@ export class JokeService {
     return this._af.database.object('/jokes/' + today);
   }
 
+  public getDailyJokeCount() {
+    return  this._af.database.list('/jokes', {
+      query: {
+        limitToLast: 1
+      }
+    })
+  }
+
   /* functions to send data to firebase */
   public submitRating(today: Date, updatedArray: number[]) {
     const jokesObservable = this.getDailyJoke(today.toString());
@@ -84,8 +92,6 @@ export class JokeService {
     //get last 5 jokes from database
     const databaseObj = this._af.database.object('/weeklysummary');
     let weekOf;
-
-
     let iterator = 1;
     const weekOfJokes = this._af.database.list('/jokes', {
       query: {
