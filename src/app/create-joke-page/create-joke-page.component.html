@@ -41,7 +41,7 @@
                     </select>
                 </div>
 
-            <button class="waves-effect waves-light btn" type="submit" (click)="addToDB()"> Submit </button>
+            <button class="waves-effect waves-light btn" type="submit" (click)="addJokeToDB()"> Submit </button>
 
         </form>
     </div>
@@ -97,7 +97,63 @@
 
     </clr-tab-content>
     <clr-tab-content>
-        Weekly stuff will go here
+        <div class="container">
+            <h1> Weekly Summary Form </h1>
+            <form>
+                <div class="form-group">
+                    <label for="description1"> News 1 Description </label>
+                    <textarea class="form-control" id="description1" required [(ngModel)]="description1" name="description1"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="reference1"> News 1 Reference </label>
+                    <input type="text" class="form-control" id="reference1" required [(ngModel)]="reference1" name="reference1">
+                </div>
+
+                <div class="form-group">
+                    <label for="description2"> News 2 Description </label>
+                    <textarea class="form-control" id="description2" required [(ngModel)]="description2" name="description2"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="reference2"> News 2 Reference </label>
+                    <input type="text" class="form-control" id="reference2" required [(ngModel)]="reference2" name="reference2">
+                </div>
+
+                <div class="form-group">
+                    <label for="description3"> News 3 Description </label>
+                    <textarea class="form-control" id="description3" required [(ngModel)]="description3" name="description3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="reference3"> News 3 Reference </label>
+                    <input type="text" class="form-control" id="reference3" required [(ngModel)]="reference3" name="reference3">
+                </div>
+
+                <div class="form-group">
+                    <label for="description4"> News 4 Description </label>
+                    <textarea class="form-control" id="description4" required [(ngModel)]="description4" name="description4"></textarea>
+                </div>
+
+                 <div class="form-group">
+                    <label for="reference4"> News 4 Reference </label>
+                    <input type="text" class="form-control" id="reference4" required [(ngModel)]="reference4" name="reference4">
+                </div>
+
+                <div class="form-group">
+                    <label for="description5"> News 5 Description </label>
+                    <textarea class="form-control" id="description5" required [(ngModel)]="description5" name="description5"></textarea>
+                </div>
+
+                 <div class="form-group">
+                    <label for="reference5"> News 5 Reference </label>
+                    <input type="text" class="form-control" id="reference5" required [(ngModel)]="reference5" name="reference5">
+                </div>
+
+            <button class="waves-effect waves-light btn" type="submit" (click)="addSummaryToDB()"> Submit </button>
+
+        </form>
+    </div>
     </clr-tab-content>
 </clr-tabs>
 

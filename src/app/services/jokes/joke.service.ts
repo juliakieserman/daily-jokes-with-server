@@ -80,4 +80,21 @@ export class JokeService {
     return paddedValue;
   }
 
+  addWeeklySummary(weeklyObj) {
+    //get last 5 jokes from database
+    let iterator = 1;
+    const weekOfJokes = this._af.database.list('/jokes', {
+      query: {
+        limitToLast: 5
+      }
+    }).subscribe(jokes => {
+      jokes.forEach(joke => {
+        const accessor = 'day' + iterator;
+        weeklyObj[accessor].jokeTitle = joke.title;
+        iterator++;
+      });
+      this._af.database.list('/weeklysummary').push(weeklyObj);
+    });
+  }
+
 }

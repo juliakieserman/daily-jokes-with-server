@@ -23,6 +23,19 @@ export class CreateJokePageComponent implements OnInit {
   private jokes: FirebaseListObservable<any[]>;
   private newJoke: JokeObj;
 
+  /* summary variables */
+  private reference1: string;
+  private description1: string;
+  private reference2: string;
+  private description2: string;
+  private reference3: string;
+  private description3: string;
+  private reference4: string;
+  private description4: string;
+  private reference5: string;
+  private description5: string;
+
+
   //file upload variables
   isDropZoneOver: boolean = false;
   isEnabledUpload: boolean = true;
@@ -65,11 +78,43 @@ export class CreateJokePageComponent implements OnInit {
     });
   }
 
-  private addToDB() {
+  private addJokeToDB() {
     this.newJoke.description = this.newJoke.description.replace(/\n/g, "<br />");
 
     this.jokeService.addJoke(this.newJoke);
     this.router.navigate(['/home']);
+  }
+
+  private addSummaryToDB() {
+    //begin constructing summary object
+    let summary = {
+      day1: {
+        "jokeTitle": '',
+        "reference" : this.reference1,
+        "description" : this.description1
+      },
+      day2: {
+        "jokeTitle": '',
+        "reference" : this.reference2,
+        "description" : this.description2
+      },
+      day3: {
+        "jokeTitle": '',
+        "reference" : this.reference3,
+        "description" : this.description3
+      },
+      day4: {
+        "jokeTitle": '',
+        "reference" : this.reference4,
+        "description" : this.description4
+      },
+      day5: {
+        "jokeTitle": '',
+        "reference" : this.reference5,
+        "description" : this.description5
+      }};
+
+      this.jokeService.addWeeklySummary(summary);
   }
 
 }
