@@ -30,14 +30,12 @@ admin.initializeApp({
  var db = admin.database();
 /* end firebase dependencies & init */
 
-var weeklyJokes = [];
+var weeklySummary;
 var weeklyUsers = [];
 //get last week's jokes
-db.ref('/jokes').limitToLast(5).once('value').then(function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-        weeklyJokes.push(childSnapshot.val());
-    });
-
+db.ref('/weeklysummary').limitToLast(1).once('value').then(function(snapshot) {
+    weeklySummary = snapshot.val();
+    //console.log(weeklySummary);
     //get weekly email users
     db.ref('/emails').once('value').then(function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
@@ -45,7 +43,7 @@ db.ref('/jokes').limitToLast(5).once('value').then(function(snapshot) {
                 weeklyUsers.push(childSnapshot.val()['email']);
             }
         });
-        weeklyEmail.render(weeklyJokes, function(err, results) {
+        weeklyEmail.render(weeklySummary, function(err, results) {
             if (err) {
                 console.log('err creating email template, ' + err);
             } else {
@@ -65,6 +63,6 @@ db.ref('/jokes').limitToLast(5).once('value').then(function(snapshot) {
                 });
             }
         })
-    })
+    });
 
 });
