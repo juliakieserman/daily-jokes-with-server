@@ -11,7 +11,7 @@ const MONTH_OBJ = ['January', 'February', 'March', 'April', 'May', 'June', 'July
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css'],
+  styleUrls: ['./home-page.component.less'],
   providers: [AssetService, JokeService]
 })
 export class HomePageComponent implements OnInit {

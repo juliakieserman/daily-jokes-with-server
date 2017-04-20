@@ -6,7 +6,7 @@ import { JokeService } from '../services/jokes/joke.service';
 @Component({
   selector: 'app-about-page',
   templateUrl: './about-page.component.html',
-  styleUrls: ['./about-page.component.css'],
+  styleUrls: ['./about-page.component.less'],
   animations: [
     trigger('flip', [
       transition('inactive => active', [
