@@ -16,6 +16,11 @@
     text-align: center;
 }
 
+.space {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
 .stars {
     margin-top: 1em;
     font-size: 2em;
