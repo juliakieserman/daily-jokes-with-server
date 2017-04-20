@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { AngularFire, FirebaseListObservable, FirebaseRef } from 'angularfire2';
 import { Router } from '@angular/router';
 import { JokeObj } from '../models/joke-model';
@@ -18,8 +17,6 @@ import * as _ from 'lodash';
 export class CreateJokePageComponent implements OnInit {
 
   private description: string;
-  private date: DateModel;
-  private options: DatePickerOptions;
   private jokes: FirebaseListObservable<any[]>;
   private newJoke: JokeObj;
 
@@ -46,7 +43,6 @@ export class CreateJokePageComponent implements OnInit {
     private router: Router, 
     private jokeService: JokeService,
     private assetService: AssetService) { 
-    this.options = new DatePickerOptions();
   }
 
   ngOnInit() {
