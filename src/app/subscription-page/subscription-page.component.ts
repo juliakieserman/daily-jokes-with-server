@@ -16,6 +16,7 @@ export class SubscriptionPageComponent implements OnInit {
 
   private _af: AngularFire;
   private changeSubscription: SubscriptionObj;
+  private subscriberCount;
 
   constructor(
     af: AngularFire,
@@ -27,6 +28,11 @@ export class SubscriptionPageComponent implements OnInit {
 
   ngOnInit() {
     this.changeSubscription = new SubscriptionObj();
+    this.getSubscriberCount();
+  }
+
+  getSubscriberCount() {
+    this._af.database.list('/emails').map(list=>list.length).subscribe(length=>this.subscriberCount=length);
   }
 
   subscribe() {
