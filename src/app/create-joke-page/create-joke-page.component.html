@@ -28,7 +28,12 @@
 
                 <div class="form-group">
                     <label for="reference"> Reference </label>
-                    <input type="text" class="form-control" id="reference" required [(ngModel)]="newJoke.reference" name="reference">
+                    <input type="url" class="form-control" id="reference" required [(ngModel)]="newJoke.reference" name="reference">
+                </div>
+
+                <div class="form-group">
+                    <label for="referenceDetails"> Reference Details </label>
+                    <input type="text" class="form-control" id="referenceDetails" required [(ngModel)]="newJoke.referenceDetails">
                 </div>
 
                 <br>

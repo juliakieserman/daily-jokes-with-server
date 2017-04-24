@@ -6,4 +6,5 @@ export class JokeObj {
   hasAsset: boolean;
   assets: string[];
   reference: string;
+  referenceDetails: string;
 }
