@@ -1,19 +1,20 @@
 <div class="container" *ngIf="subscriberCount">
-    <form>
+    <form #emailForm="ngForm">
         <section class="form-block">
             <label>Subscribe to join <span class="blue">{{subscriberCount}}</span> other subscribers and get jokes delivered to the comfort of your inbox</label>
             <div class="form-group">
                 <label for="email">Email</label>
                 <input 
-                ngControl="email" 
                 type="text" 
-                name="email" 
+                name="email"
                 [(ngModel)]="changeSubscription.email" 
-                id="email" 
-                placeholder="Enter your email" 
+                placeholder="Enter your email"
+                #email="ngModel"
                 size="45"
-                required
-                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                required email>
+            </div>
+            <div [hidden]="email.valid || email.pristine" style="color: red">
+                Valid email is required.
             </div>
             <div class="form-group">
                 <label for="subscriptionType">Frequency of Emails:</label>
@@ -26,7 +27,7 @@
                     </select>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" (click)="subscribe()">Submit</button>
+            <button type="submit" class="btn btn-primary" (click)="subscribe()" [disabled]="!emailForm.valid">Submit</button>
         </section>
     </form>
 </div>
