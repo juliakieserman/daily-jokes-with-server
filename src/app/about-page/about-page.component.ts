@@ -75,10 +75,17 @@ export class AboutPageComponent implements OnInit {
     this.showContact = true;
   }
 
-  private submitContact() {
+  private resetContact() {
     this.showContact = false;
+    this.emailName = '';
+    this.emailValue = '';
+    this.emailMessage = '';
+  }
+
+  private submitContact() {
     this.submittedContact = true;
     this.emailService.sendMessage(this.emailName, this.emailValue, this.emailMessage).subscribe();
+    this.resetContact();
   }
 
 }

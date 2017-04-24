@@ -12,9 +12,14 @@
       <button class="btn btn-primary center" (click)="randomJoke()"> Make me Laugh </button>
       <button class="btn btn-primary center" (click)="contactMe()"> Contact Me </button>
     </div>
+
+    <!-- start contact form -->
     <div class="row" *ngIf="showContact">
-      <form #contactForm="ngForm">
-        <label> Contact Form </label>
+      <form #contactForm="ngForm" class="form-center">
+        <div class="form-label">
+          <label> Contact Form </label>
+          <p style="margin-top: .5em"> * Must complete all fields to submit form * </p>
+        </div>
 
         <!-- Name -->
         <div class="form-group">
@@ -50,20 +55,24 @@
               Message is required.
           </div>
         </div>
-        <button class="btn btn-primary" [disabled]="!contactForm.valid">Submit</button>
+        <button class="btn btn-primary" (click)="submitContact()" [disabled]="!contactForm.valid">Submit</button>
+        <button class="btn btn-primary" (click)="resetContact()">Cancel</button>
       </form>
     </div>
     <div *ngIf="submittedContact">
       <p> Thanks for your message! </p>
     </div>
-    <div class="row">
+    <!--end contact form -->
+
+    <!-- animation to show day count -->
+    <div class="row" [hidden]="showContact">
       <div class="card date" [@flip]="flipState" (click)="toggleMove()">
         <div class="card-block number">
           {{content}}
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row" [hidden]="showContact">
       <p class="extra-text"> {{reveal}} </p>
     </div>
   </div>
