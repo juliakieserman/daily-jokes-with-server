@@ -10,6 +10,30 @@
       <br>
       <br>
       <button class="btn btn-primary center" (click)="randomJoke()"> Make me Laugh </button>
+      <button class="btn btn-primary center" (click)="contactMe()"> Contact Me </button>
+    </div>
+    <div class="row" *ngIf="showContact">
+      <form>
+        <section class="form-block">
+          <label> Contact Form </label>
+          <div class="form-group">
+            <label for="emailName"> Your Name </label>
+            <input type="text" id="emailName" size="45" required name="emailName" [(ngModel)]="emailName">
+          </div>
+          <div class="form-group">
+            <label for="emailValue"> Your Email </label>
+            <input type="text" id="emailValue" size=45 name="emailValue" [(ngModel)]="emailValue" required>
+          </div>
+          <div class="form-group">
+            <label for="emailMessage"> Your Message </label>
+            <textarea class="form-control" id="emailMessage" name="emailMessage" required [(ngModel)]="emailMessage"></textarea>
+          </div>
+          <button type="submit" (click)="submitContact()" class="btn btn-primary"> Submit </button>
+        </section>
+      </form> 
+    </div>
+    <div *ngIf="submittedContact">
+      <p> Thanks for your message! </p>
     </div>
     <div class="row">
       <div class="card date" [@flip]="flipState" (click)="toggleMove()">

@@ -9,6 +9,11 @@ app.use(express.static(__dirname + '/dist'));
 app.use('api', api);
 /* end server set-up */
 
+app.post('/contact', function(req, res) {
+  console.log("caught it");
+  console.log(req.body);
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, keyframes, transition, animate } from '@angular/animations';
 import { Router } from '@angular/router';
 import { JokeService } from '../services/jokes/joke.service';
+import { EmailService } from '../services/email/email.service';
 
 @Component({
   selector: 'app-about-page',
@@ -20,7 +21,7 @@ import { JokeService } from '../services/jokes/joke.service';
       ])
     ])
   ],
-  providers: [JokeService]
+  providers: [JokeService, EmailService]
 })
 export class AboutPageComponent implements OnInit {
 
@@ -29,9 +30,17 @@ export class AboutPageComponent implements OnInit {
   reveal: string = 'click to reveal';
   jokeCount: number;
 
+  //contact form variables
+  showContact: boolean = false;
+  submittedContact: boolean = false;
+  emailName: string;
+  emailMessage: string;
+  emailValue: string;
+
   constructor(
     private jokeService: JokeService,
-    private router: Router) {
+    private router: Router,
+    private emailService: EmailService) {
    }
 
   ngOnInit() {
@@ -56,6 +65,16 @@ export class AboutPageComponent implements OnInit {
     let randomDate = new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()));
     let param = this.jokeService.formatDate(randomDate);
     this.router.navigate(['/home', param]);
+  }
+
+  private contactMe() {
+    this.showContact = true;
+  }
+
+  private submitContact() {
+    this.showContact = false;
+    this.submittedContact = true;
+    this.emailService.sendMessage(this.emailName, this.emailValue, this.emailMessage);
   }
 
 }
