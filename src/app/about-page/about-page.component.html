@@ -13,24 +13,45 @@
       <button class="btn btn-primary center" (click)="contactMe()"> Contact Me </button>
     </div>
     <div class="row" *ngIf="showContact">
-      <form>
-        <section class="form-block">
-          <label> Contact Form </label>
-          <div class="form-group">
-            <label for="emailName"> Your Name </label>
-            <input type="text" id="emailName" size="45" required name="emailName" [(ngModel)]="emailName">
+      <form #contactForm="ngForm">
+        <label> Contact Form </label>
+
+        <!-- Name -->
+        <div class="form-group">
+          <label for="name"> Name </label>
+          <input type="text" class="form-control" 
+            [(ngModel)]="emailName" name="name" 
+            required
+            #name="ngModel">
+            <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+              Name is required.
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email"> Email </label>
+          <input type="email" [(ngModel)]="emailValue" name="email" 
+            required email 
+            #email="ngModel">
+          <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+            Valid email is required.
           </div>
-          <div class="form-group">
-            <label for="emailValue"> Your Email </label>
-            <input type="text" id="emailValue" size=45 name="emailValue" [(ngModel)]="emailValue" required>
+        </div>
+
+        <!-- Message -->
+        <div class="form-group">
+          <label for="message"> Message </label>
+          <textarea [(ngModel)]="emailMessage" name="message"
+            #message="ngModel" 
+            required
+            ></textarea>
+            <div [hidden]="message.valid || message.pristine" class="alert alert-danger">
+              Message is required.
           </div>
-          <div class="form-group">
-            <label for="emailMessage"> Your Message </label>
-            <textarea class="form-control" id="emailMessage" name="emailMessage" required [(ngModel)]="emailMessage"></textarea>
-          </div>
-          <button type="submit" (click)="submitContact()" class="btn btn-primary"> Submit </button>
-        </section>
-      </form> 
+        </div>
+        <button class="btn btn-primary" [disabled]="!contactForm.valid">Submit</button>
+      </form>
     </div>
     <div *ngIf="submittedContact">
       <p> Thanks for your message! </p>

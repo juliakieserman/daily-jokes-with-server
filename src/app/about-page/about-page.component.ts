@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { trigger, state, style, keyframes, transition, animate } from '@angular/animations';
 import { Router } from '@angular/router';
 import { JokeService } from '../services/jokes/joke.service';
@@ -23,6 +24,7 @@ import { EmailService } from '../services/email/email.service';
   ],
   providers: [JokeService, EmailService]
 })
+
 export class AboutPageComponent implements OnInit {
 
   flipState: string = 'inactive';
@@ -36,11 +38,13 @@ export class AboutPageComponent implements OnInit {
   emailName: string;
   emailMessage: string;
   emailValue: string;
+  formValid: boolean = false;
 
   constructor(
     private jokeService: JokeService,
     private router: Router,
-    private emailService: EmailService) {
+    private emailService: EmailService,
+    ) {
    }
 
   ngOnInit() {
