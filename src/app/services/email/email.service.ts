@@ -22,7 +22,7 @@ export class EmailService {
   }
 
   public sendMessage(name: string, value: string, message: string) {
-    let url = "jokes-website.herokuapp.com/contact";
+    let url = "https://jokes-website.herokuapp.com/contact";
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
 

@@ -74,7 +74,7 @@ export class AboutPageComponent implements OnInit {
   private submitContact() {
     this.showContact = false;
     this.submittedContact = true;
-    this.emailService.sendMessage(this.emailName, this.emailValue, this.emailMessage);
+    this.emailService.sendMessage(this.emailName, this.emailValue, this.emailMessage).subscribe();
   }
 
 }
