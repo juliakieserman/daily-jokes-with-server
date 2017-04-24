@@ -24,37 +24,44 @@
         <!-- Name -->
         <div class="form-group">
           <label for="name"> Name </label>
-          <input type="text" class="form-control" 
+          <div class="input-container">
+            <input type="text" class="input" 
             [(ngModel)]="emailName" name="name" 
             required
             #name="ngModel">
-            <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-              Name is required.
+            <div [hidden]="name.valid || name.pristine">
+              <clr-icon shape="times" class="is-error input-img" tooltip="Name is required"></clr-icon>
             </div>
+          </div>
         </div>
 
         <!-- Email -->
         <div class="form-group">
           <label for="email"> Email </label>
-          <input type="email" [(ngModel)]="emailValue" name="email" 
-            required email 
-            #email="ngModel">
-          <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
-            Valid email is required.
+          <div class="input-container">
+            <input type="email" [(ngModel)]="emailValue" name="email" 
+              required email 
+              #email="ngModel">
+              <div [hidden]="email.valid || email.pristine">
+                <clr-icon shape="times" class="is-error input-img" tooltip="Valid email is required"></clr-icon>
+              </div>
           </div>
         </div>
 
         <!-- Message -->
         <div class="form-group">
           <label for="message"> Message </label>
-          <textarea [(ngModel)]="emailMessage" name="message"
-            #message="ngModel" 
-            required
-            ></textarea>
-            <div [hidden]="message.valid || message.pristine" class="alert alert-danger">
-              Message is required.
+          <div class="input-container">
+            <textarea [(ngModel)]="emailMessage" name="message"
+              #message="ngModel" 
+              required
+              ></textarea>
+              <div [hidden]="message.valid || message.pristine">
+                <clr-icon shape="times" class="is-error input-img" tooltip="Message is required"></clr-icon>
+              </div>
           </div>
         </div>
+        
         <button class="btn btn-primary" (click)="submitContact()" [disabled]="!contactForm.valid">Submit</button>
         <button class="btn btn-primary" (click)="resetContact()">Cancel</button>
       </form>

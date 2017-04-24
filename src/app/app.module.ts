@@ -8,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
 import { ClarityModule } from 'clarity-angular';
 import { RatingModule } from 'ng2-bootstrap/rating';
+import { TooltipModule } from 'ng2-bootstrap/tooltip';
 
 /* ng components */
 import { AppComponent } from './app.component';
@@ -59,7 +60,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     ClarityModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
-    RatingModule.forRoot()
+    RatingModule.forRoot(),
+    TooltipModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
