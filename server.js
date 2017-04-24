@@ -18,16 +18,12 @@ app.use('api', api);
 /* end server set-up */
 
 app.post('/contact', function(req, res) {
-  console.log("caught it");
-  console.log(req.body);
-
-  /*
   var transporter = nodemailer.createTransport(mg(auth));
   var message = {
-    from: 'get the user from address',
+    from: req.body.postVars.email,
     to: 'kieserman.julia@gmail.com',
-    subject: 'name goes here ' + ' sent jokeonme.com a message',
-    text: ' the message get this'
+    subject: req.body.postVars.name + ' sent jokeonme.com a message',
+    text: req.body.postVars.message
   }
   transporter.sendMail(message, function(err, inf) {
     if (err) {
@@ -35,7 +31,7 @@ app.post('/contact', function(req, res) {
     } else {
       console.log('Email Response: ' + info);
     }
-  });*/
+  });
 });
 
 app.get('*', (req, res) => {
