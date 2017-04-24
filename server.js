@@ -20,7 +20,7 @@ app.use('api', api);
 app.post('/contact', function(req, res) {
   const email = req.body.postVars.email;
   console.log(email);
-  /*var transporter = nodemailer.createTransport(mg(auth));
+  var transporter = nodemailer.createTransport(mg(auth));
   var message = {
     from: req.body.postVars.email,
     to: 'kieserman.julia@gmail.com',
@@ -33,7 +33,7 @@ app.post('/contact', function(req, res) {
     } else {
       console.log('Email Response: ' + info);
     }
-  });*/
+  });
 });
 
 app.get('*', (req, res) => {
