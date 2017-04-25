@@ -21,6 +21,7 @@ import { JokesArchivePageComponent } from './jokes-archive-page/jokes-archive-pa
 /* directives */
 import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 import { CreateJokePageComponent } from './create-joke-page/create-joke-page.component';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyAq3BR1axTBqeqdqHWbqF68bPShUOiML8Y",
@@ -49,7 +50,8 @@ const appRoutes: Routes = [
     SubscriptionPageComponent,
     JokesArchivePageComponent,
     NgDropFilesDirective,
-    CreateJokePageComponent
+    CreateJokePageComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
