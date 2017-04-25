@@ -13,9 +13,6 @@ const auth = {
     }
 }
 
-console.log("just testing");
-console.log(auth);
-
 /* server set-up */
 const api = require('./server/api');
 
