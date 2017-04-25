@@ -30,3 +30,7 @@ a {
   text-decoration: none;
   color: grey;
 }
+
+.main-content {
+  border-bottom: 1px dashed;
+}
