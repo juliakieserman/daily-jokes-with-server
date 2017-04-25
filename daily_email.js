@@ -43,7 +43,6 @@ addZero = function(value) {
 
 prettifyDate = function(date) {
     console.log(date);
-
 }
 /* End functions to format today's date */
 
