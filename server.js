@@ -6,7 +6,12 @@ const path = require('path');
 /* mailgun dependencies & init */
 const nodemailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
-const auth = require('./config.json');
+const auth = {
+    auth: {
+        api_key: process.env.MAILGUN_API_KEY,
+        domain: process.env.MAILGUN_DOMAIN
+    }
+}
 
 /* server set-up */
 const api = require('./server/api');

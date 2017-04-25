@@ -3,7 +3,12 @@ const MONTH_OBJ = ['January', 'February', 'March', 'April', 'May', 'June', 'July
 /* mailgun dependencies & init */
 const nodemailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
-const auth = require('./config.json');
+const auth = {
+    auth: {
+        api_key: process.env.MAILGUN_API_KEY,
+        domain: process.env.MAILGUN_DOMAIN
+    }
+}
 
 var nodemailerMailgun = nodemailer.createTransport(mg(auth));
 /* end mailgun dependencies & init */
