@@ -84,6 +84,70 @@ db.ref('/jokes/' + dateRef).once('value').then(function(snapshot) {
                 dailyUsers.push(childSnapshot.val()['email']);
             }
         });
+        //quick fix for weird issue....need to find permanent solution
+        //bennett email breaks
+        dailyEmail.render(dailyJoke, function(err, results) {
+            if (err) {
+                console.log('err creating email template, ' + err);
+            } else {
+             message = {
+                from: 'kieserman.julia@gmail.com',
+                to: process.env.BROKEN_EMAIL_1,
+                subject: 'Joke of the Day: ' + dailyJoke.date,
+                html: results.html,
+                text: results.text
+            };
+            nodemailerMailgun.sendMail(message, function(err, info) {
+                if (err) {
+                    console.log('Mailgun Error: ' + err);
+                } else {
+                    console.log('Email Response: ' + info);
+                }
+                });
+            }
+        })
+        //Dean's school email breaks
+        dailyEmail.render(dailyJoke, function(err, results) {
+            if (err) {
+                console.log('err creating email template, ' + err);
+            } else {
+             message = {
+                from: 'kieserman.julia@gmail.com',
+                to: process.env.BROKEN_EMAIL_2,
+                subject: 'Joke of the Day: ' + dailyJoke.date,
+                html: results.html,
+                text: results.text
+            };
+            nodemailerMailgun.sendMail(message, function(err, info) {
+                if (err) {
+                    console.log('Mailgun Error: ' + err);
+                } else {
+                    console.log('Email Response: ' + info);
+                }
+                });
+            }
+        })
+        //teri email breaks
+        dailyEmail.render(dailyJoke, function(err, results) {
+            if (err) {
+                console.log('err creating email template, ' + err);
+            } else {
+             message = {
+                from: 'kieserman.julia@gmail.com',
+                to: process.env.BROKEN_EMAIL_3,
+                subject: 'Joke of the Day: ' + dailyJoke.date,
+                html: results.html,
+                text: results.text
+            };
+            nodemailerMailgun.sendMail(message, function(err, info) {
+                if (err) {
+                    console.log('Mailgun Error: ' + err);
+                } else {
+                    console.log('Email Response: ' + info);
+                }
+                });
+            }
+        })
         dailyEmail.render(dailyJoke, function(err, results) {
             if (err) {
                 console.log('err creating email template, ' + err);
