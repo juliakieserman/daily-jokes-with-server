@@ -1,3 +1,4 @@
+const MONTH_OBJ = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 /* mailgun dependencies & init */
 const nodemailer = require('nodemailer');
@@ -41,8 +42,13 @@ addZero = function(value) {
     return paddedValue
 }
 
-prettifyDate = function(date) {
-    console.log(date);
+prettifyDate = function(dateStr) {
+    var date = new Date(dateStr);
+    var dd = date.getDate();
+    var mm = date.getMonth();
+    var yyyy = date.getFullYear();
+    var month = MONTH_OBJ[mm-1];
+    return month + ' ' + dd + ', ' + yyyy;  
 }
 /* End functions to format today's date */
 
@@ -67,7 +73,7 @@ db.ref('/jokes/' + dateRef).once('value').then(function(snapshot) {
              message = {
                 from: 'kieserman.julia@gmail.com',
                 to: dailyUsers,
-                subject: 'Joke of the Day: ' + dateRef,
+                subject: 'Joke of the Day: ' + dailyJoke.date,
                 html: results.html,
                 text: results.text
             };

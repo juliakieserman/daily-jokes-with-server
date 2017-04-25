@@ -18,8 +18,6 @@ app.use('api', api);
 /* end server set-up */
 
 app.post('/contact', function(req, res) {
-  const email = req.body.postVars.email;
-  console.log(email);
   var transporter = nodemailer.createTransport(mg(auth));
   var message = {
     from: req.body.postVars.email,
@@ -27,7 +25,7 @@ app.post('/contact', function(req, res) {
     subject: req.body.postVars.name + ' sent jokeonme.com a message',
     text: req.body.postVars.message
   }
-  transporter.sendMail(message, function(err, inf) {
+  transporter.sendMail(message, function(err, info) {
     if (err) {
       console.log('Mailgun Error: ' + err);
     } else {
