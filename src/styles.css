@@ -1,4 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+.loading-style {
+    font-family: 'ostrich-sans-rounded';
+    font-size: 2.5em;
+    color: #F81B84;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    text-transform: uppercase;
+    height: 100vh;
+}
+
+@keyframes dots {
+    50% {
+      transform: translateY(-.4rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .d {
+    animation: dots 1.5s ease-out infinite;
+  }
+  .d-2 {
+    animation-delay: .5s;
+  }
+  .d-3 {
+    animation-delay: 1s;
+  }
+
+
 
 /* 
 ----------------
