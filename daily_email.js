@@ -3,6 +3,8 @@ const MONTH_OBJ = ['January', 'February', 'March', 'April', 'May', 'June', 'July
 /* mailgun dependencies & init */
 const nodemailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
+
+/* UNCOMMENT TO RUN LOCALLY */
 //const auth = require('./mailgunSecrets.json');
 const auth = {
     auth: {
@@ -12,8 +14,6 @@ const auth = {
 }
 
 var nodemailerMailgun = nodemailer.createTransport(mg(auth));
-console.log("mailgun");
-console.log(nodemailerMailgun);
 /* end mailgun dependencies & init */
 
 /* template dependencies & init */
@@ -26,6 +26,8 @@ var dailyEmail = new EmailTemplate(templateDir);
 
 /* firebase dependencies & init */
 var admin = require('firebase-admin');
+
+/* UNCOMMENT TO RUN LOCALLY */
 //var serviceAccount = require('./serviceAccount.json');
 
 var serviceAccount = 
@@ -41,10 +43,6 @@ var serviceAccount =
   auth_provider_x509_cert_url: process.env.SERVICE_ACCOUNT_AUTH_PROVIDER_x509_CERT_URL,
   client_x509_cert_url: process.env.SERVICE_ACCOUNT_CLIENT_x509_CERT_URL
 }
-console.log("service account");
-console.log(serviceAccount);
-
-
 
 admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
@@ -83,7 +81,7 @@ prettifyDate = function(dateStr) {
 const dateRef = getDate();
 var dailyJoke;
 var dailyUsers = [];
-/*db.ref('/jokes/' + dateRef).once('value').then(function(snapshot) {
+db.ref('/jokes/' + dateRef).once('value').then(function(snapshot) {
     dailyJoke = snapshot.val();
     dailyJoke.date = prettifyDate(dailyJoke.date);
 
@@ -119,4 +117,4 @@ var dailyUsers = [];
 }, function(error) {
     console.log('Promise rejected');
     console.log(error);
-}); //end joke retrieval*/
+}); //end joke retrieval
