@@ -27,8 +27,7 @@ var dailyEmail = new EmailTemplate(templateDir);
 /* firebase dependencies & init */
 var admin = require('firebase-admin');
 //var serviceAccount = require('./serviceAccount.json');
-console.log("service account");
-console.log(serviceAccount);
+
 var serviceAccount = 
 {
   type: process.env.SERVICE_ACCOUNT_TYPE,
@@ -42,6 +41,8 @@ var serviceAccount =
   auth_provider_x509_cert_url: process.env.SERVICE_ACCOUNT_AUTH_PROVIDER_x509_CERT_URL,
   client_x509_cert_url: process.env.SERVICE_ACCOUNT_CLIENT_x509_CERT_URL
 }
+console.log("service account");
+console.log(serviceAccount);
 
 admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
