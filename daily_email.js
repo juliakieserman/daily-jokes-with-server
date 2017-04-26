@@ -12,7 +12,7 @@ const auth = {
 }
 
 var nodemailerMailgun = nodemailer.createTransport(mg(auth));
-console.log('mailgun object');
+console.log("mailgun");
 console.log(nodemailerMailgun);
 /* end mailgun dependencies & init */
 
@@ -27,7 +27,9 @@ var dailyEmail = new EmailTemplate(templateDir);
 /* firebase dependencies & init */
 var admin = require('firebase-admin');
 var serviceAccount = require('./serviceAccount.json');
-/*var serviceAccount = 
+console.log("service account");
+console.log(serviceAccount);
+var serviceAccount = 
 {
   type: process.env.SERVICE_ACCOUNT_TYPE,
   project_id: process.env.SERVICE_ACCOUNT_PROJECT_ID,
@@ -39,7 +41,7 @@ var serviceAccount = require('./serviceAccount.json');
   token_uri: process.env.SERVICE_ACCOUNT_TOKEN_URI,
   auth_provider_x509_cert_url: process.env.SERVICE_ACCOUNT_AUTH_PROVIDER_x509_CERT_URL,
   client_x509_cert_url: process.env.SERVICE_ACCOUNT_CLIENT_x509_CERT_URL
-}*/
+}
 
 admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
