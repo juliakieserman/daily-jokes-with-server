@@ -98,7 +98,7 @@ db.ref('/jokes/' + dateRef).once('value').then(function(snapshot) {
             } else {
              message = {
                 from: 'kieserman.julia@gmail.com',
-                to: 'jbk67@georgetown.edu',
+                to: dailyUsers,
                 subject: 'Joke of the Day: ' + dateRef,
                 html: results.html,
                 text: results.text
