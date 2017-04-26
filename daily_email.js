@@ -26,7 +26,7 @@ var dailyEmail = new EmailTemplate(templateDir);
 
 /* firebase dependencies & init */
 var admin = require('firebase-admin');
-var serviceAccount = require('./serviceAccount.json');
+//var serviceAccount = require('./serviceAccount.json');
 console.log("service account");
 console.log(serviceAccount);
 var serviceAccount = 
