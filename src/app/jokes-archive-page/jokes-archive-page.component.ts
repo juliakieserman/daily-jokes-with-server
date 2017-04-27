@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 import { trigger, state, style, keyframes, transition, animate } from '@angular/animations';
 import { Router } from '@angular/router';
 import { AngularFire } from 'angularfire2';
@@ -30,6 +30,9 @@ export class JokesArchivePageComponent implements OnInit {
   private elementRef;
   private searchText = '';
   private titles: JokeObj[] = [];
+  private showCategories = false;
+
+  @Output() onShowCategory = new EventEmitter<boolean>();
 
  // private shakeState: string = 'inactive';
 
@@ -41,6 +44,11 @@ export class JokesArchivePageComponent implements OnInit {
   ngOnInit() {
     this.jokeList = [];
     this.loadData();
+  }
+
+  category() {
+    this.showCategories = !this.showCategories;
+    this.onShowCategory.emit(this.showCategories);
   }
 
   /*toggleShake() {

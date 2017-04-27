@@ -2,6 +2,7 @@
   <div class="row">
     <input class="pull-right" type="text" [(ngModel)]="searchText" placeholder="Search..." (keyup)="filterSearch()" size="45">
     <clr-icon shape="search" size="12"></clr-icon>
+    <clr-icon shape="menu" (click)="category()"></clr-icon>
   </div>
   <div class="row">
     <table class="table" *ngIf="searchList.length > 0">
@@ -34,4 +35,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

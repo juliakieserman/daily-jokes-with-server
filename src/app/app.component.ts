@@ -1,20 +1,17 @@
 import { Component } from '@angular/core';
 import { HomePageComponent } from './home-page/home-page.component';
-import { FlowService } from './services/flow/flow.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [FlowService]
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'app works!';
-  private sideView: boolean;
-  private flowService: FlowService;
+  private showCategory: boolean = false;
 
-  constructor() {
-      this.sideView = this.flowService.getShowCategories();
+  onShowCategory(category: boolean) {
+    this.showCategory = category;
   }
   
 }
