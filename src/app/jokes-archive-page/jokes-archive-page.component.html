@@ -14,7 +14,8 @@
   </div>
   <div class="row" *ngIf="jokeList.length > 0">
     <div class="col-lg-4 col-md-8 col-sm-12 col-xs-12" *ngFor="let joke of jokeList" (click)="goToJoke(joke)">
-      <div class="card" [@shake]="shakeState" (mouseover)="toggleShake()" (mouseout)="toggleShake()">
+      <div class="card">
+      <!--[@shake]="shakeState" (mouseover)="toggleShake()" (mouseout)="toggleShake()">-->
         <div class="card-block">
           <div class="row">
             <div class="col-lg-3">

@@ -3,6 +3,9 @@ const MONTH_OBJ = ['January', 'February', 'March', 'April', 'May', 'June', 'July
 /* mailgun dependencies & init */
 const nodemailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
+
+/* UNCOMMENT TO RUN LOCALLY */
+//const auth = require('./mailgunSecrets.json');
 const auth = {
     auth: {
         api_key: process.env.MAILGUN_API_KEY,
@@ -23,12 +26,16 @@ var dailyEmail = new EmailTemplate(templateDir);
 
 /* firebase dependencies & init */
 var admin = require('firebase-admin');
+
+/* UNCOMMENT TO RUN LOCALLY */
+//var serviceAccount = require('./serviceAccount.json');
+
 var serviceAccount = 
 {
   type: process.env.SERVICE_ACCOUNT_TYPE,
   project_id: process.env.SERVICE_ACCOUNT_PROJECT_ID,
   private_key_id: process.env.SERVICE_ACCOUNT_PRIVATE_KEY_ID,
-  private_key: process.env.SERVICE_ACCOUNT_PRIVATE_KEY,
+  private_key: process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
   client_email: process.env.SERVICE_ACCOUNT_CLIENT_EMAIL,
   client_id: process.env.SERVICE_ACCOUNT_CLIENT_ID,
   auth_uri: process.env.SERVICE_ACCOUNT_AUTH_URI,
@@ -84,70 +91,7 @@ db.ref('/jokes/' + dateRef).once('value').then(function(snapshot) {
                 dailyUsers.push(childSnapshot.val()['email']);
             }
         });
-        //quick fix for weird issue....need to find permanent solution
-        //bennett email breaks
-        dailyEmail.render(dailyJoke, function(err, results) {
-            if (err) {
-                console.log('err creating email template, ' + err);
-            } else {
-             message = {
-                from: 'kieserman.julia@gmail.com',
-                to: process.env.BROKEN_EMAIL_1,
-                subject: 'Joke of the Day: ' + dailyJoke.date,
-                html: results.html,
-                text: results.text
-            };
-            nodemailerMailgun.sendMail(message, function(err, info) {
-                if (err) {
-                    console.log('Mailgun Error: ' + err);
-                } else {
-                    console.log('Email Response: ' + info);
-                }
-                });
-            }
-        })
-        //Dean's school email breaks
-        dailyEmail.render(dailyJoke, function(err, results) {
-            if (err) {
-                console.log('err creating email template, ' + err);
-            } else {
-             message = {
-                from: 'kieserman.julia@gmail.com',
-                to: process.env.BROKEN_EMAIL_2,
-                subject: 'Joke of the Day: ' + dailyJoke.date,
-                html: results.html,
-                text: results.text
-            };
-            nodemailerMailgun.sendMail(message, function(err, info) {
-                if (err) {
-                    console.log('Mailgun Error: ' + err);
-                } else {
-                    console.log('Email Response: ' + info);
-                }
-                });
-            }
-        })
-        //teri email breaks
-        dailyEmail.render(dailyJoke, function(err, results) {
-            if (err) {
-                console.log('err creating email template, ' + err);
-            } else {
-             message = {
-                from: 'kieserman.julia@gmail.com',
-                to: process.env.BROKEN_EMAIL_3,
-                subject: 'Joke of the Day: ' + dailyJoke.date,
-                html: results.html,
-                text: results.text
-            };
-            nodemailerMailgun.sendMail(message, function(err, info) {
-                if (err) {
-                    console.log('Mailgun Error: ' + err);
-                } else {
-                    console.log('Email Response: ' + info);
-                }
-                });
-            }
-        })
+
         dailyEmail.render(dailyJoke, function(err, results) {
             if (err) {
                 console.log('err creating email template, ' + err);
@@ -155,7 +99,7 @@ db.ref('/jokes/' + dateRef).once('value').then(function(snapshot) {
              message = {
                 from: 'kieserman.julia@gmail.com',
                 to: dailyUsers,
-                subject: 'Joke of the Day: ' + dailyJoke.date,
+                subject: 'Joke of the Day: ' + dateRef,
                 html: results.html,
                 text: results.text
             };
