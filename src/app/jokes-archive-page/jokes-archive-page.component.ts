@@ -3,12 +3,13 @@ import { trigger, state, style, keyframes, transition, animate } from '@angular/
 import { Router } from '@angular/router';
 import { AngularFire } from 'angularfire2';
 import { JokeObj } from '../models/joke-model';
-import { JokeService } from '../services/jokes/joke.service';
+import { FlowService } from '../services/flow/flow.service';
 
 @Component({
   selector: 'app-jokes-archive-page',
   templateUrl: './jokes-archive-page.component.html',
   styleUrls: ['./jokes-archive-page.component.css'],
+  providers: [FlowService]
   /*animations: [
     trigger('shake', [
       transition('inactive => active', [
@@ -30,13 +31,16 @@ export class JokesArchivePageComponent implements OnInit {
   private elementRef;
   private searchText = '';
   private titles: JokeObj[] = [];
-  private showCategories = false;
 
-  @Output() onShowCategory = new EventEmitter<boolean>();
+  /* toggle categories side bar */
+  private showCategories: boolean = false;
 
  // private shakeState: string = 'inactive';
 
-  constructor(af: AngularFire, private router: Router, private element: ElementRef) {
+  constructor(af: AngularFire, 
+    private router: Router, 
+    private element: ElementRef,
+    private flowService: FlowService) {
     this._af = af;
     this.elementRef = element;
   }
@@ -48,7 +52,7 @@ export class JokesArchivePageComponent implements OnInit {
 
   category() {
     this.showCategories = !this.showCategories;
-    this.onShowCategory.emit(this.showCategories);
+    this.flowService.setToggle(this.showCategories);
   }
 
   /*toggleShake() {
