@@ -9,7 +9,7 @@ import { JokeService } from '../services/jokes/joke.service';
   selector: 'app-jokes-archive-page',
   templateUrl: './jokes-archive-page.component.html',
   styleUrls: ['./jokes-archive-page.component.css'],
-  animations: [
+  /*animations: [
     trigger('shake', [
       transition('inactive => active', [
         animate(1000, keyframes([
@@ -20,7 +20,7 @@ import { JokeService } from '../services/jokes/joke.service';
         ]))
       ])
     ])
-  ]
+  ]*/
 })
 export class JokesArchivePageComponent implements OnInit {
 
@@ -31,7 +31,7 @@ export class JokesArchivePageComponent implements OnInit {
   private searchText = '';
   private titles: JokeObj[] = [];
 
-  private shakeState: string = 'inactive';
+ // private shakeState: string = 'inactive';
 
   constructor(af: AngularFire, private router: Router, private element: ElementRef) {
     this._af = af;
@@ -43,7 +43,7 @@ export class JokesArchivePageComponent implements OnInit {
     this.loadData();
   }
 
-  toggleShake() {
+  /*toggleShake() {
     if (this.shakeState == 'active') {
       console.log('setting to inactive');
       this.shakeState = 'inactive';
@@ -51,7 +51,7 @@ export class JokesArchivePageComponent implements OnInit {
       console.log('setting to active');
       this.shakeState = 'active';
     }
-  }
+  }*/
 
   private loadData() {
     this._af.database.list('/jokes').subscribe(jokes => {
