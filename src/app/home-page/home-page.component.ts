@@ -95,11 +95,7 @@ export class HomePageComponent implements OnInit {
 
 private addZero(value: Number) {
   let paddedValue;
-  if (value < 10) {
-    paddedValue = '0' + value;
-  } else {
-    paddedValue = value;
-  }
+  value < 10 ? paddedValue = '0' + value : paddedValue = value;
   return paddedValue;
 }
   
