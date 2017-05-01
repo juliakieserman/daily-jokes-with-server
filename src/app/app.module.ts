@@ -17,6 +17,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { SubscriptionPageComponent } from './subscription-page/subscription-page.component';
 import { JokesArchivePageComponent } from './jokes-archive-page/jokes-archive-page.component';
+import { CategoriesPageComponent } from './categories-page/categories-page.component';
 
 /* directives */
 import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
@@ -38,7 +39,8 @@ const appRoutes: Routes = [
   { path: 'home/:date', component: HomePageComponent },
   { path: 'subscriptions', component: SubscriptionPageComponent },
   { path: 'archives', component: JokesArchivePageComponent },
-  { path: 'create', component: CreateJokePageComponent }
+  { path: 'create', component: CreateJokePageComponent }, 
+  { path: 'categories', component: CategoriesPageComponent }
 ];
 
 @NgModule({
@@ -51,6 +53,7 @@ const appRoutes: Routes = [
     JokesArchivePageComponent,
     NgDropFilesDirective,
     CreateJokePageComponent,
+    CategoriesPageComponent,
     SidebarComponent
   ],
   imports: [
