@@ -78,10 +78,11 @@ export class HomePageComponent implements OnInit {
 
     //no jokes on saturdays
     if (today.getDay() === 6) {
+      console.log("it is a saturday!");
       var yesterday = new Date();
       yesterday.setDate(today.getDate() - 1);
       today = yesterday;
-    } else if (today.getDay() === 7) {
+    } else if (today.getDay() === 0) {
       var yesterday = new Date();
       yesterday.setDate(today.getDate() - 2);
       today = yesterday;
