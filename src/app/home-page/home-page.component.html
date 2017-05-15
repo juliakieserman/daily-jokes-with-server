@@ -30,6 +30,11 @@
               
   </div>
   </div>
+  <clr-icon shape="caret left" class="left-arrow" (click)="getPrevious()"></clr-icon>
+  <div *ngIf="hasFuture">
+    <clr-icon shape="caret right"  class="right-arrow" (click)="getNext()"></clr-icon>
+  </div>
+
   <div *ngIf="jokeFlag">
     <h1> Uh oh! Looks like today's joke is still in the works. Hang tight! </h1>
   </div>

@@ -17,6 +17,7 @@ const MONTH_OBJ = ['January', 'February', 'March', 'April', 'May', 'June', 'July
 export class HomePageComponent implements OnInit {
 
   private todayDisplay;
+  private hasFuture: boolean = true;
   private todaySearch;
   private jokeToday: JokeObj;
   private jokeRatings: FirebaseListObservable<any>;
@@ -50,13 +51,12 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.sub = this.route.params.subscribe(params => {
       this.passedData = params['date'];
     });
 
     if(this.passedData) {
-      this.searchToday = this.passedData
+      this.searchToday = this.passedData;
     } else {
       this.searchToday = this.getTodayDate();
     }
@@ -78,7 +78,6 @@ export class HomePageComponent implements OnInit {
 
     //no jokes on saturdays
     if (today.getDay() === 6) {
-      console.log("it is a saturday!");
       var yesterday = new Date();
       yesterday.setDate(today.getDate() - 1);
       today = yesterday;
@@ -100,7 +99,7 @@ private addZero(value: Number) {
 }
   
 private loadDailyJoke(searchDate: string) {
-
+    
     //get joke object and bind
     this.jokeService.getDailyJoke(searchDate).subscribe(data => {
       if (data.$value === null) {
@@ -108,6 +107,17 @@ private loadDailyJoke(searchDate: string) {
       }
      
       this.jokeToday = data;
+      console.log("got new joke obj");
+      console.log(this.jokeToday);
+
+      var date = new Date();
+      var today = this.jokeService.formatDate(date);
+
+     if (today === this.jokeToday.date.toString()) {
+       this.hasFuture = false;
+     } else {
+       this.hasFuture = true;
+     }
     
       if (this.jokeToday.hasAsset == true) {
         this.assetHandler();
@@ -121,7 +131,6 @@ private loadDailyJoke(searchDate: string) {
 
   private assetHandler() {
       this.assets = [];
-      console.log("in asset handler");
       for (var i=0; i < this.jokeToday.assets.length; i++) {
         let path = 'images/' + this.jokeToday.assets[i];
         let image: string;
@@ -134,6 +143,32 @@ private loadDailyJoke(searchDate: string) {
         )
       }
     
+  }
+
+  /* easily navigate jokes */
+  private getPrevious() {
+    var current = new Date(this.jokeToday.date);
+    if (current.getDay() === 6)
+    { current.setDate(current.getDate() - 1);
+    } else if (current.getDay() === 0) {
+      current.setDate(current.getDate() - 2);
+    }
+
+    this.loadDailyJoke(this.jokeService.formatDate(current));
+  }
+
+  private getNext() {
+    var current = new Date(this.jokeToday.date);
+    //sets to a day earlier 
+    current.setDate(current.getDate() + 2);
+    
+    if (current.getDay() === 6)
+    { current.setDate(current.getDate() + 2);
+    } else if (current.getDay() === 0) {
+      current.setDate(current.getDate() + 1);
+    }
+
+    this.loadDailyJoke(this.jokeService.formatDate(current));
   }
 
   /* rating functions */
