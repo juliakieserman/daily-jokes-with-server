@@ -1,7 +1,7 @@
 <div class="container" *ngIf="subscriberCount">
     <form #emailForm="ngForm">
         <section class="form-block">
-            <label>Subscribe to join <span class="blue">{{subscriberCount}}</span> other subscribers and get jokes delivered to the comfort of your inbox</label>
+            <label class="ostrich-font">Subscribe to join <span class="blue">{{subscriberCount}}</span> other joke appreciators and get jokes delivered to the comfort of your inbox 5 days a week!</label>
             <div class="form-group">
                 <label for="email">Email</label>
                 <input 
@@ -28,6 +28,7 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-primary" (click)="subscribe()" [disabled]="!emailForm.valid">Submit</button>
+            <p class="unsubscribe"> To unsubscribe, enter your email and choose 'No Emails' from the dropdown menu. </p>
         </section>
     </form>
 </div>

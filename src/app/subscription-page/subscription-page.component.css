@@ -3,10 +3,19 @@
     border-color: #F81B84;
 }
 
+.ostrich-font {
+    font-family: 'circle-gordita';
+}
+
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
     background-color: #fdbada;
 }
 
 .blue {
     color: #43C0F6;
+}
+
+.unsubscribe {
+    font-style: italic;
+    font-size: 1em;
 }
