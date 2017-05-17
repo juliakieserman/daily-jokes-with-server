@@ -27,12 +27,11 @@
                   <button type="submit" class="btn btn-primary" (click)="submitRating()">Submit</button>
                 </div>
               </div>
-              
+    <clr-icon shape="caret left" class="left-arrow" (click)="getPrevious()"></clr-icon>
+    <div *ngIf="hasFuture">
+      <clr-icon shape="caret right"  class="right-arrow" (click)="getNext()"></clr-icon>
+    </div>     
   </div>
-  </div>
-  <clr-icon shape="caret left" class="left-arrow" (click)="getPrevious()"></clr-icon>
-  <div *ngIf="hasFuture">
-    <clr-icon shape="caret right"  class="right-arrow" (click)="getNext()"></clr-icon>
   </div>
 
   <div *ngIf="jokeFlag">
