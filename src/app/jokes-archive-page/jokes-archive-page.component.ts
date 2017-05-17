@@ -9,6 +9,7 @@ import { JokeService } from '../services/jokes/joke.service';
   selector: 'app-jokes-archive-page',
   templateUrl: './jokes-archive-page.component.html',
   styleUrls: ['./jokes-archive-page.component.css'],
+  providers: [JokeService]
   /*animations: [
     trigger('shake', [
       transition('inactive => active', [
@@ -29,11 +30,13 @@ export class JokesArchivePageComponent implements OnInit {
   public searchList: JokeObj[] = [];
   private elementRef;
   private searchText = '';
-  private titles: JokeObj[] = [];
 
  // private shakeState: string = 'inactive';
 
-  constructor(af: AngularFire, private router: Router, private element: ElementRef) {
+  constructor(af: AngularFire, 
+    private router: Router, 
+    private element: ElementRef,
+    private jokeService: JokeService) {
     this._af = af;
     this.elementRef = element;
   }
@@ -54,12 +57,19 @@ export class JokesArchivePageComponent implements OnInit {
   }*/
 
   private loadData() {
-    this._af.database.list('/jokes').subscribe(jokes => {
-      jokes.forEach(joke => {
-        this.jokeList.push(joke);
-        this.titles.push(joke.title);
-      });
-    });
+    var today = this.jokeService.formatDate(new Date());
+    console.log("want to end at");
+    console.log(today);
+
+    this._af.database.list('/jokes', {
+      query: {
+        orderByKey: true,
+        endAt: today
+      }}).subscribe(jokes => {
+        jokes.forEach(joke => {
+          this.jokeList.push(joke);
+      })
+    })
   }
 
   private goToJoke(item: JokeObj) {
