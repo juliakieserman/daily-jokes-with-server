@@ -43,6 +43,10 @@ td:hover {
     text-align: right;
 }
 
+.filter-text {
+    display: inline;
+}
+
 .search {
     float: left;
 }

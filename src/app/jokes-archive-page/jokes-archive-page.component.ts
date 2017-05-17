@@ -33,6 +33,7 @@ export class JokesArchivePageComponent implements OnInit {
 
   /* variables for filtering */
   private heartFilter: boolean = false;
+  private listFilter: boolean = false;
 
  // private shakeState: string = 'inactive';
 
@@ -90,12 +91,21 @@ export class JokesArchivePageComponent implements OnInit {
     }
   }
 
+  private getStyle(filterVal) {
+    if (filterVal) 
+      return 'pink';
+    else 
+      return 'black';
+  }
+
   private setFilter(shape) {
     switch(shape) {
       case 'heart':
         this.heartFilter = !this.heartFilter;
-        console.log('new heart value');
-        console.log(this.heartFilter);
+        this.listFilter = false;
+      case 'list':
+        this.listFilter = !this.listFilter;
+        this.heartFilter = false;
       default:
         this.heartFilter = false;
     }

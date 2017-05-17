@@ -5,16 +5,9 @@
       <clr-icon shape="search" size="12"></clr-icon>
     </div>
     <div class="col-md-6 col-sm-12 filters">
-      <p> Filter jokes by category </p>
-      <clr-icon shape="heart" (click)="setFilter('heart')" class="is-solid" size="12"></clr-icon>
-      <clr-icon shape="view-list" (click)="setFilter('heart')" class="is-solid" size="12"></clr-icon>
-      <!--div *ngIf="!heartFilter">
-        <clr-icon shape="heart" (click)="setFilter('heart')" size="12"></clr-icon>
-      </div>
-      <div *ngIf="heartFilter">
-        <p> wut is goin on </p>
-        <clr-icon shape="heart" (click)="setFilter('heart')" class="is-solid" size="12"></clr-icon>
-      </div>-->
+      <p class="filter-text"> Filter jokes by category: </p>
+      <clr-icon shape="view-list" (click)="setFilter('heart')" [style.color]="getStyle(listFilter)" tooltip="lists" class="is-solid" size="12"></clr-icon>
+      <clr-icon shape="heart" (click)="setFilter('list')" [style.color]="getStyle(heartFilter)" tooltip="favorites" class="is-solid" size="12"></clr-icon>
     </div>
   </div>
   <div class="row">
