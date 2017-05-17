@@ -1,7 +1,21 @@
 <div class="container">
   <div class="row">
-    <input class="pull-right" type="text" [(ngModel)]="searchText" placeholder="Search..." (keyup)="filterSearch()" size="45">
-    <clr-icon shape="search" size="12"></clr-icon>
+    <div class="col-md-6 col-sm-12 search">
+      <input type="text" [(ngModel)]="searchText" placeholder="Search..." (keyup)="filterSearch()" size="45">
+      <clr-icon shape="search" size="12"></clr-icon>
+    </div>
+    <div class="col-md-6 col-sm-12 filters">
+      <p> Filter jokes by category </p>
+      <clr-icon shape="heart" (click)="setFilter('heart')" class="is-solid" size="12"></clr-icon>
+      <clr-icon shape="view-list" (click)="setFilter('heart')" class="is-solid" size="12"></clr-icon>
+      <!--div *ngIf="!heartFilter">
+        <clr-icon shape="heart" (click)="setFilter('heart')" size="12"></clr-icon>
+      </div>
+      <div *ngIf="heartFilter">
+        <p> wut is goin on </p>
+        <clr-icon shape="heart" (click)="setFilter('heart')" class="is-solid" size="12"></clr-icon>
+      </div>-->
+    </div>
   </div>
   <div class="row">
     <table class="table" *ngIf="searchList.length > 0">

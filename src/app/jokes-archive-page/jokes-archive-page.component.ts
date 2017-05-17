@@ -31,6 +31,9 @@ export class JokesArchivePageComponent implements OnInit {
   private elementRef;
   private searchText = '';
 
+  /* variables for filtering */
+  private heartFilter: boolean = false;
+
  // private shakeState: string = 'inactive';
 
   constructor(af: AngularFire, 
@@ -58,8 +61,6 @@ export class JokesArchivePageComponent implements OnInit {
 
   private loadData() {
     var today = this.jokeService.formatDate(new Date());
-    console.log("want to end at");
-    console.log(today);
 
     this._af.database.list('/jokes', {
       query: {
@@ -86,6 +87,17 @@ export class JokesArchivePageComponent implements OnInit {
       });
     } else {
       this.searchList = [];
+    }
+  }
+
+  private setFilter(shape) {
+    switch(shape) {
+      case 'heart':
+        this.heartFilter = !this.heartFilter;
+        console.log('new heart value');
+        console.log(this.heartFilter);
+      default:
+        this.heartFilter = false;
     }
   }
 

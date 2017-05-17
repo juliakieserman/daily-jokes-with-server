@@ -37,3 +37,12 @@ td:hover {
     background-color: #43C0F6;
     color: white;
 }
+
+.filters {
+    float: right;
+    text-align: right;
+}
+
+.search {
+    float: left;
+}
