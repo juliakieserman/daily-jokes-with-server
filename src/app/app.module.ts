@@ -22,6 +22,13 @@ import { JokesArchivePageComponent } from './jokes-archive-page/jokes-archive-pa
 import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 import { CreateJokePageComponent } from './create-joke-page/create-joke-page.component';
 
+/* services */
+import { AssetService } from './services/assets/asset.service';
+import { EmailService } from './services/email/email.service';
+import { JokeService } from './services/jokes/joke.service';
+
+import { ReversePipe } from './jokes-archive-page/array-reverse.pipe';
+
 export const firebaseConfig = {
     apiKey: "AIzaSyAq3BR1axTBqeqdqHWbqF68bPShUOiML8Y",
     authDomain: "jokes-website.firebaseapp.com",
@@ -49,7 +56,8 @@ const appRoutes: Routes = [
     SubscriptionPageComponent,
     JokesArchivePageComponent,
     NgDropFilesDirective,
-    CreateJokePageComponent
+    CreateJokePageComponent,
+    ReversePipe
   ],
   imports: [
     BrowserModule,
@@ -63,7 +71,11 @@ const appRoutes: Routes = [
     RatingModule.forRoot(),
     TooltipModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    AssetService, 
+    JokeService,
+    EmailService  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
