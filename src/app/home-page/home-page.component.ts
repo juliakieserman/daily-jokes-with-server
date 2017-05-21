@@ -53,13 +53,8 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.passedData = params['date'];
+      this.passedData ? this.searchToday = this.passedData : this.searchToday = this.getTodayDate();
     });
-
-    if(this.passedData) {
-      this.searchToday = this.passedData;
-    } else {
-      this.searchToday = this.getTodayDate();
-    }
 
     //load data
     this.loadDailyJoke(this.searchToday);
@@ -81,10 +76,12 @@ export class HomePageComponent implements OnInit {
       var yesterday = new Date();
       yesterday.setDate(today.getDate() - 1);
       today = yesterday;
+      this.hasFuture = false;
     } else if (today.getDay() === 0) {
       var yesterday = new Date();
       yesterday.setDate(today.getDate() - 2);
       today = yesterday;
+      this.hasFuture = false;
     }
 
     // format dates to search database and display on page
