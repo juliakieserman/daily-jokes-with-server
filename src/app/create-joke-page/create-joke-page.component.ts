@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire, FirebaseListObservable, FirebaseRef } from 'angularfire2';
+import { AngularFire, FirebaseListObservable, AuthProviders, AuthMethods } from 'angularfire2';
 import { Router } from '@angular/router';
 import { JokeObj } from '../models/joke-model';
 import { AssetObj } from '../models/asset-model';
@@ -19,6 +19,9 @@ export class CreateJokePageComponent implements OnInit {
   private description: string;
   private jokes: FirebaseListObservable<any[]>;
   private newJoke: JokeObj;
+  private isAuthorized: boolean = false;
+  private isUser: boolean = false;
+  private showError: boolean = false;
 
   /* summary variables */
   private reference1: string;
@@ -43,6 +46,41 @@ export class CreateJokePageComponent implements OnInit {
     private router: Router, 
     private jokeService: JokeService,
     private assetService: AssetService) { 
+      this.af.auth.subscribe(auth => {
+        //someone is logged in
+        if (auth) {
+          this.isUser = true;
+          this.isAuthorized = this.checkValidLogin(auth);
+        }
+      })
+  }
+
+  private checkValidLogin(auth) {
+    //hard coded for my email
+    if (auth.uid === 'kJWBwwXK5qOxGfIuym3fRgBXCOc2') {
+      return true;
+    }
+    
+    return false;
+  }
+
+  loginGoogle() {
+    this.af.auth.login({
+      provider: AuthProviders.Google,
+      method: AuthMethods.Popup,
+    }).then(
+      (success) => {
+        this.isUser = true;
+        this.isAuthorized = this.checkValidLogin(success);
+      }).catch(
+        (err) => {
+          console.log('maybe some error handling goes here');
+      })
+  }
+
+  logout() {
+    this.af.auth.logout();
+    this.router.navigateByUrl('/home');
   }
 
   ngOnInit() {
@@ -78,7 +116,7 @@ export class CreateJokePageComponent implements OnInit {
     this.newJoke.description = this.newJoke.description.replace(/\n/g, "<br />");
 
     this.jokeService.addJoke(this.newJoke);
-    this.router.navigate(['/home']);
+    this.logout();
   }
 
   private addSummaryToDB() {

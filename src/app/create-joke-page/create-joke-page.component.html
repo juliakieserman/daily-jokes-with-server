@@ -1,3 +1,13 @@
+<div *ngIf="!isAuthorized">
+    <div *ngIf="!isUser">
+        <button (click)="loginGoogle()" id="google">Login With Google</button>
+    </div>
+    <div *ngIf="isUser">
+        <p> You are not authorized to access this page. Please return to the home page by clicking <a (click)="logout()"> here.</a></p>
+    </div>
+</div>
+
+<div *ngIf="isAuthorized">
 <clr-tabs>
     <clr-tab-link>Daily Joke</clr-tab-link>
     <clr-tab-link>Weekly Summary</clr-tab-link>
@@ -161,4 +171,5 @@
     </div>
     </clr-tab-content>
 </clr-tabs>
+</div>
 
