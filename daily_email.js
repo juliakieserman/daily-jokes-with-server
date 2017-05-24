@@ -72,7 +72,7 @@ prettifyDate = function(dateStr) {
     var dd = date.getDate();
     var mm = date.getMonth();
     var yyyy = date.getFullYear();
-    var month = MONTH_OBJ[mm-1];
+    var month = MONTH_OBJ[mm];
     return month + ' ' + dd + ', ' + yyyy;  
 }
 /* End functions to format today's date */
