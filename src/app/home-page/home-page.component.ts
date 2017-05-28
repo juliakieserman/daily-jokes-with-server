@@ -17,6 +17,7 @@ const MONTH_OBJ = ['January', 'February', 'March', 'April', 'May', 'June', 'July
 export class HomePageComponent implements OnInit {
 
   private todayDisplay;
+  private weekend: boolean = false;
   private hasFuture: boolean = true;
   private todaySearch;
   private jokeToday: JokeObj;
@@ -70,23 +71,24 @@ export class HomePageComponent implements OnInit {
     var mm = today.getMonth()+1;
     var month = MONTH_OBJ[mm-1];
     var yyyy = today.getFullYear();
-
-    //no jokes on saturdays
+    
     if (today.getDay() === 6) {
-      var yesterday = new Date();
-      yesterday.setDate(today.getDate() - 1);
-      today = yesterday;
-      this.hasFuture = false;
+      today = this.weekendFormat(today, 1);
+
     } else if (today.getDay() === 0) {
-      var yesterday = new Date();
-      yesterday.setDate(today.getDate() - 2);
-      today = yesterday;
-      this.hasFuture = false;
+      today = this.weekendFormat(today, 2);
     }
 
     // format dates to search database and display on page
     this.todayDisplay = month + ' ' + dd + ', ' + yyyy;
     return this.jokeService.formatDate(today);
+}
+
+private weekendFormat(day, offset) {
+  var yesterday = new Date();
+  yesterday.setDate(day.getDate() - offset);
+  this.weekend = true;
+  return yesterday;
 }
 
 private addZero(value: Number) {
@@ -110,11 +112,7 @@ private loadDailyJoke(searchDate: string) {
       var date = new Date();
       var today = this.jokeService.formatDate(date);
 
-     if (today === this.jokeToday.date.toString()) {
-       this.hasFuture = false;
-     } else {
-       this.hasFuture = true;
-     }
+      this.weekend || today === this.jokeToday.date.toString() ? this.hasFuture = false : this.hasFuture = true;
     
       if (this.jokeToday.hasAsset == true) {
         this.assetHandler();
