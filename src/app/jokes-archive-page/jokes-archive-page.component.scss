@@ -1,5 +1,7 @@
+@import '../shared/styles/_colors.scss';
+
 .date {
-    color: #43C0F6;
+    color: $joke-blue;
     font-weight: bold;
     text-align: center;
     display: inline-block;
@@ -34,6 +36,6 @@
 
 td:hover {
     text-decoration: none;
-    background-color: #43C0F6;
+    background-color: $joke-blue;
     color: white;
 }

@@ -9,7 +9,7 @@ import { SubscriptionObj } from '../models/subscription-model';
 @Component({
   selector: 'app-subscription-page',
   templateUrl: './subscription-page.component.html',
-  styleUrls: ['./subscription-page.component.css'],
+  styleUrls: ['./subscription-page.component.scss'],
   providers: [EmailService]
 })
 export class SubscriptionPageComponent implements OnInit {

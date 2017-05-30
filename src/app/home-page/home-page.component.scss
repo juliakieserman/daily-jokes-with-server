@@ -1,13 +1,11 @@
-@base-orange: #FDB813;
-@base-pink: #F81B84;
-@base-blue: #43C0F6;
+@import '../shared/styles/_colors.scss';
 
 .parallax-container {
     background-color: #F2EEE2;
 }
 
 .date-today {
-    color: #43C0F6;
+    color: $joke-blue;
     font-weight: bold;
     font-size: 2em;
 }
@@ -36,7 +34,7 @@
 .stars {
     margin-top: 1em;
     font-size: 2em;
-    color: @base-blue;
+    color: $joke-blue;
 }
 
 .submit-button {
@@ -48,7 +46,7 @@
     font-family: 'ostrich-sans-rounded';
     font-weight: bold;
     font-size: 4em;
-    color: @base-pink;
+    color: $joke-pink;
     margin-left: auto;
     margin-right: auto;
     margin-top: .5em;
@@ -61,8 +59,8 @@
 }
 
 .btn {
-    background-color: @base-pink;
-    border-color: @base-pink;
+    background-color: $joke-pink;
+    border-color: $joke-pink;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {

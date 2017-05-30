@@ -10,7 +10,7 @@ import * as _ from 'lodash';
 @Component({
   selector: 'app-create-joke-page',
   templateUrl: './create-joke-page.component.html',
-  styleUrls: ['./create-joke-page.component.css'],
+  styleUrls: ['./create-joke-page.component.scss'],
   providers: [JokeService, AssetService]
 })
 

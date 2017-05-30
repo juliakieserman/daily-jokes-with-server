@@ -1,19 +1,17 @@
+@import '../shared/styles/_colors.scss';
+
 .ostrich-font {
     font-family: 'ostrich-sans-regular';
 }
 
-.center-text {
-    text-align: center;
-}
-
 .center {
-    .center-text;
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
 }
 
 .header-text {
-    .ostrich-font;
+    font-family: 'ostrich-sans-regular';
     color: #43C0F6;
     font-size: 3em;
     font-weight: bold;
@@ -34,8 +32,8 @@
 }
 
 .btn {
-    background-color: #F81B84;
-    border-color: #F81B84;
+    background-color: $joke-pink;
+    border-color: $joke-pink;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
@@ -51,10 +49,10 @@
 
 .number {
     font-size: 7em;
-    .center-text;
-    color: #43C0F6;
+    text-align: center;
+    color: $joke-blue;
     font-weight: bold;
-    .ostrich-font;
+    font-family: 'ostrich-sans-regular';
     float: none;
 }
 
@@ -66,8 +64,8 @@
 .extra-text {
     margin-left: auto;
     margin-right: auto;
-    .center-text;
-    .ostrich-font;
+    text-align: center;
+    font-family: 'ostrich-sans-regular';
     font-size: 2em;
 }
 

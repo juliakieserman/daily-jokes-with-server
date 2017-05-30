@@ -8,7 +8,7 @@ import { JokeService } from '../services/jokes/joke.service';
 @Component({
   selector: 'app-jokes-archive-page',
   templateUrl: './jokes-archive-page.component.html',
-  styleUrls: ['./jokes-archive-page.component.css'],
+  styleUrls: ['./jokes-archive-page.component.scss'],
   providers: [JokeService]
   /*animations: [
     trigger('shake', [

@@ -8,7 +8,7 @@ import { EmailService } from '../services/email/email.service';
 @Component({
   selector: 'app-about-page',
   templateUrl: './about-page.component.html',
-  styleUrls: ['./about-page.component.less'],
+  styleUrls: ['./about-page.component.scss'],
   animations: [
     trigger('flip', [
       transition('inactive => active', [
