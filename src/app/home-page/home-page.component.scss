@@ -1,4 +1,5 @@
 @import '../shared/styles/_colors.scss';
+@import '../shared/styles/_fonts.scss';
 
 .parallax-container {
     background-color: #F2EEE2;
@@ -43,7 +44,7 @@
 }
 
 .header-text {
-    font-family: 'ostrich-sans-rounded';
+    font-family: $ostrich-font-regular;
     font-weight: bold;
     font-size: 4em;
     color: $joke-pink;
@@ -54,8 +55,12 @@
 }
 
 .description-text {
-    font-family: 'cicle-gordita';
+    font-family: $circle-font;
     font-size: 1.5em;
+}
+
+.img-responsive.img-center {
+  margin: 0 auto;
 }
 
 .btn {
@@ -64,9 +69,5 @@
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
-    background-color: #fdbada;
-}
-
-.img-responsive.img-center {
-  margin: 0 auto;
+    background-color: $pink-compliment;
 }

@@ -1,4 +1,5 @@
 @import '../shared/styles/_colors.scss';
+@import '../shared/styles/_fonts.scss';
 
 .btn {
     background-color: $joke-pink;
@@ -6,15 +7,15 @@
 }
 
 .ostrich-font {
-    font-family: 'circle-gordita';
+    font-family: $circle-font;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
-    background-color: #fdbada;
+    background-color: $pink-compliment;
 }
 
-.blue {
-    color: #43C0F6;
+span {
+    color: $joke-blue;
 }
 
 .unsubscribe {

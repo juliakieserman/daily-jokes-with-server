@@ -1,4 +1,5 @@
 @import '../shared/styles/_colors.scss';
+@import '../shared/styles/_fonts.scss';
 
 .date {
     color: $joke-blue;
@@ -15,7 +16,7 @@
 .title {
     text-align: center;
     font-size: 2em;
-    font-family: 'ostrich-sans-regular';
+    font-family: $ostrich-font-regular;
 }
 
 .center {
@@ -30,7 +31,7 @@
 }
 
 .searchText {
-    font-family: 'ostrich-sans-regular';
+    font-family: $ostrich-font-regular;
     font-size: 1.5em;
 }
 
