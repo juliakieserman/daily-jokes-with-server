@@ -1,5 +1,6 @@
 @import '../shared/styles/_colors.scss';
 @import '../shared/styles/_fonts.scss';
+@import '../shared/styles/_base.scss';
 
 .center {
     text-align: center;
@@ -16,7 +17,7 @@
 }
 
 .paragraph-text {
-    font-family: '$circle-font';
+    font-family: $circle-font;
     font-size: 1.5em;
 }
 
@@ -50,8 +51,8 @@
 }
 
 .space {
-    margin-top: 2em;
-    margin-bottom: 2em;
+    margin-top: $gutter-2;
+    margin-bottom: $gutter-2;
 }
 
 .extra-text {
@@ -65,7 +66,7 @@
 .form-center {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 2em;
+    margin-top: $gutter-2;
 }
 
 .form-label {

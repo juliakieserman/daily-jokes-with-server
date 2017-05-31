@@ -100,7 +100,7 @@ db.ref('/jokes/' + dateRef).once('value').then(function(snapshot) {
                 from: 'kieserman.julia@gmail.com',
                 to: 'kieserman.julia@gmail.com',
                 bcc: dailyUsers,
-                subject: 'Joke of the Day: ' + dateRef,
+                subject: 'Joke of the Day: ' + dailyJoke.title,
                 html: results.html,
                 text: results.text
             };

@@ -1,0 +1,10 @@
+@import './shared/styles/_colors.scss';
+
+.btn {
+    background-color: $joke-pink;
+    border-color: $joke-pink;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    background-color: $pink-compliment;
+}
