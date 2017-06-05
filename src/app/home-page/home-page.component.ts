@@ -15,21 +15,15 @@ const MONTH_OBJ = ['January', 'February', 'March', 'April', 'May', 'June', 'July
   providers: [AssetService, JokeService]
 })
 export class HomePageComponent implements OnInit {
-
-  private todayDisplay;
-  private weekend: boolean = false;
-  private hasFuture: boolean = true;
-  private todaySearch;
-  private jokeToday: JokeObj;
-  private jokeRatings: FirebaseListObservable<any>;
+  private isWeekend: boolean = false; //true if it is a weekend
+  private hasFuture: boolean = true; //true if there is a more recent joke
+  private jokeToday: JokeObj; //joke to be displayed on page
+  private jokeRatings: FirebaseListObservable<any>; //ratings
   private sub: any;
-  private passedData: string;
-  private searchToday: string;
-  private jokeFlag: boolean = false;
+  private assets: string[];//holds assets for joke (if any)
 
-  private load: boolean = false;
-
-  private assets: string[];
+  // NEW STUFF HERE
+  today;
 
   /* rating variables */
   public max: number = 5;
@@ -52,75 +46,49 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
+    let jokeKey
+    let passedData;
+    this.today = new Date();
+
+    //if routed from archives site, there will be a passed paramter
     this.sub = this.route.params.subscribe(params => {
-      this.passedData = params['date'];
-      this.passedData ? this.searchToday = this.passedData : this.searchToday = this.getTodayDate();
+      passedData = params['date'];
+      passedData ? jokeKey = passedData : jokeKey = this.jokeService.formatDate(this.today);
     });
 
+    //if weekend, set joke to previous Friday
+    if (this.today.getDay() === 6) {
+      this.isWeekend = true;
+      jokeKey = new Date().setDate(this.today.getDay() - 1);
+    } else if (this.today.getDay() === 0) {
+      this.isWeekend = true;
+      jokeKey = new Date().setDate(this.today.getDay() - 2);
+    }
+
     //load data
-    this.loadDailyJoke(this.searchToday);
+    this.loadDailyJoke(jokeKey);
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
-  private getTodayDate() {
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth()+1;
-    var month = MONTH_OBJ[mm-1];
-    var yyyy = today.getFullYear();
-    
-    if (today.getDay() === 6) {
-      today = this.weekendFormat(today, 1);
-
-    } else if (today.getDay() === 0) {
-      today = this.weekendFormat(today, 2);
-    }
-
-    // format dates to search database and display on page
-    this.todayDisplay = month + ' ' + dd + ', ' + yyyy;
-    return this.jokeService.formatDate(today);
-}
-
-private weekendFormat(day, offset) {
-  var yesterday = new Date();
-  yesterday.setDate(day.getDate() - offset);
-  this.weekend = true;
-  return yesterday;
-}
-
-private addZero(value: Number) {
-  let paddedValue;
-  value < 10 ? paddedValue = '0' + value : paddedValue = value;
-  return paddedValue;
-}
   
-private loadDailyJoke(searchDate: string) {
-    
+  private loadDailyJoke(jokeKey) {    
     //get joke object and bind
-    this.jokeService.getDailyJoke(searchDate).subscribe(data => {
-      if (data.$value === null) {
-        this.jokeFlag = true;
-      }
-     
+    this.jokeService.getDailyJoke(jokeKey).subscribe(data => {
       this.jokeToday = data;
-      console.log("got new joke obj");
-      console.log(this.jokeToday);
-
-      var date = new Date();
-      var today = this.jokeService.formatDate(date);
-
-      this.weekend || today === this.jokeToday.date.toString() ? this.hasFuture = false : this.hasFuture = true;
+      let dateString = this.jokeService.formatDate(this.today);
+      //does not have future joke if it is today or a friday
+      dateString === this.jokeToday.date || this.isWeekend ? this.hasFuture = false : this.hasFuture = true;
     
-      if (this.jokeToday.hasAsset == true) {
+      //load assets, if applicable
+      if (this.jokeToday.hasAsset === true) {
         this.assetHandler();
       }
     });
 
     //get ratings for this joke
-    this.jokeRatings = this._af.database.list('/ratings/' + searchDate);
+    this.jokeRatings = this._af.database.list('/ratings/' + jokeKey);
 
   }
 
@@ -179,7 +147,6 @@ private loadDailyJoke(searchDate: string) {
     //acknowledge submission to user
     this.submittedRating = true;
     this.isReadonly = true;
-
     this.jokeRatings.push(this.rate);
   }
 }
