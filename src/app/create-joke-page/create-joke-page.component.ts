@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire, FirebaseListObservable, AuthProviders, AuthMethods } from 'angularfire2';
+import { AngularFire, AngularFireDatabase, FirebaseListObservable, AuthProviders, AuthMethods } from 'angularfire2';
 import { Router } from '@angular/router';
 import { JokeObj } from '../models/joke-model';
 import { AssetObj } from '../models/asset-model';
@@ -16,25 +16,16 @@ import * as _ from 'lodash';
 
 export class CreateJokePageComponent implements OnInit {
 
-  private description: string;
-  private jokes: FirebaseListObservable<any[]>;
-  private newJoke: JokeObj;
-  private isAuthorized: boolean = false;
-  private isUser: boolean = false;
-  private showError: boolean = false;
+  create: boolean = false;
+  edit: boolean = false; //true if choose to edit a joke
+  editing: boolean = false; //true if currently editing a selected joke
+  activeJoke: JokeObj;
 
-  /* summary variables */
-  private reference1: string;
-  private description1: string;
-  private reference2: string;
-  private description2: string;
-  private reference3: string;
-  private description3: string;
-  private reference4: string;
-  private description4: string;
-  private reference5: string;
-  private description5: string;
+  //authorization variables 
+  isAuthorized: boolean = false;
+  isUser: boolean = false;
 
+  jokeList: FirebaseListObservable<any>;
 
   //file upload variables
   isDropZoneOver: boolean = false;
@@ -42,11 +33,13 @@ export class CreateJokePageComponent implements OnInit {
   files: Array<AssetObj[]> = [];
 
   constructor(
-    private af: AngularFire, 
+    private _af: AngularFire, 
     private router: Router, 
     private jokeService: JokeService,
-    private assetService: AssetService) { 
-      this.af.auth.subscribe(auth => {
+    private assetService: AssetService,
+    private db: AngularFireDatabase) { 
+      this.jokeList = db.list('/jokes');
+      this._af.auth.subscribe(auth => {
         //someone is logged in
         if (auth) {
           this.isUser = true;
@@ -55,6 +48,39 @@ export class CreateJokePageComponent implements OnInit {
       })
   }
 
+  ngOnInit() {
+    this.activeJoke = new JokeObj();
+  }
+
+  back() {
+    this.activeJoke = new JokeObj();
+    this.edit = false;
+    this.create = false;
+    this.editing = false;
+  }
+
+  updateAction(action) {
+    if (action === 'edit') {
+      this.edit = true;
+    } else {
+      this.create = true;
+    }
+  }
+
+  selectToEdit(joke) {
+    this.activeJoke = joke;
+    this.editing = true;
+  }
+
+  saveChanges() {
+    const databaseObj = this._af.database.object('/jokes');
+    const keyValue = this.activeJoke.date;
+    databaseObj.update({ [keyValue]: this.activeJoke });
+    this.editing = false;
+    this.edit = false;
+  }
+  
+  /* AUTHENTICATION FUNCTIONS */
   private checkValidLogin(auth) {
     //hard coded for my email
     if (auth.uid === 'kJWBwwXK5qOxGfIuym3fRgBXCOc2') {
@@ -65,7 +91,7 @@ export class CreateJokePageComponent implements OnInit {
   }
 
   loginGoogle() {
-    this.af.auth.login({
+    this._af.auth.login({
       provider: AuthProviders.Google,
       method: AuthMethods.Popup,
     }).then(
@@ -79,12 +105,8 @@ export class CreateJokePageComponent implements OnInit {
   }
 
   logout() {
-    this.af.auth.logout();
+    this._af.auth.logout();
     this.router.navigateByUrl('/home');
-  }
-
-  ngOnInit() {
-    this.newJoke = new JokeObj();
   }
 
   /* Start file upload functions */
@@ -93,7 +115,7 @@ export class CreateJokePageComponent implements OnInit {
   }
 
   uploadImagesToFirebase() {
-    this.newJoke.hasAsset = true;
+    this.activeJoke.hasAsset = true;
     this.isEnabledUpload = false;
     this.addFileNames();
     this.assetService.uploadImagesToFirebase(this.files);
@@ -106,54 +128,16 @@ export class CreateJokePageComponent implements OnInit {
   /* End file upload functions */
 
   private addFileNames() {
-    this.newJoke.assets = [];
+    this.activeJoke.assets = [];
     _.each(this.files, (item: AssetObj) => {
-      this.newJoke.assets.push(item.file.name);
+      this.activeJoke.assets.push(item.file.name);
     });
   }
 
   private addJokeToDB() {
-    this.newJoke.description = this.newJoke.description.replace(/\n/g, "<br />");
+    this.activeJoke.description = this.activeJoke.description.replace(/\n/g, "<br />");
 
-    this.jokeService.addJoke(this.newJoke);
-    this.logout();
+    this.jokeService.addJoke(this.activeJoke);
+    this.create = false;
   }
-
-  private addSummaryToDB() {
-    //begin constructing summary object
-    let summary = {
-      day1: {
-        "jokeTitle": '',
-        "date": '',
-        "reference" : this.reference1,
-        "description" : this.description1
-      },
-      day2: {
-        "jokeTitle": '',
-        "date": '',
-        "reference" : this.reference2,
-        "description" : this.description2
-      },
-      day3: {
-        "jokeTitle": '',
-        "date": '',
-        "reference" : this.reference3,
-        "description" : this.description3
-      },
-      day4: {
-        "jokeTitle": '',
-        "date": '',
-        "reference" : this.reference4,
-        "description" : this.description4
-      },
-      day5: {
-        "jokeTitle": '',
-        "date": '',
-        "reference" : this.reference5,
-        "description" : this.description5
-      }};
-
-      this.jokeService.addWeeklySummary(summary);
-  }
-
 }

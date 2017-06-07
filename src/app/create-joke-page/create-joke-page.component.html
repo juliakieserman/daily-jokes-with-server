@@ -8,59 +8,77 @@
 </div>
 
 <div *ngIf="isAuthorized">
-<clr-tabs>
-    <clr-tab-link>Daily Joke</clr-tab-link>
-    <clr-tab-link>Weekly Summary</clr-tab-link>
+    
+    <div *ngIf="!create && !edit">
+        <h2> What would you like to do? </h2>
+        <button (click)="updateAction('create')"> Create a new joke </button>
+        <button (click)="updateAction('edit')"> Edit a joke </button>
+    </div>
 
-    <clr-tab-content>
-        <div class="container">
-            <h1> New Joke Form </h1>
-            <form>
+    <div *ngIf="edit && !editing">
+        <h2> Select a joke to edit </h2>
+        <ul>
+            <li *ngFor="let joke of jokeList | async" (click)="selectToEdit(joke)">
+                {{joke.title}}
+            </li>
+        </ul>
+    </div>
+
+    <div *ngIf="create">
+        <h2> Create a joke </h2>
+    </div>
+
+    <div *ngIf="create || editing">
+         <form>
                 <div class="form-group">
                     <label for="title"> Title </label>
-                    <input type="text" class="form-control" id="title" required [(ngModel)]="newJoke.title" name="title">
+                    <input type="text" class="form-control" id="title" required [(ngModel)]="activeJoke.title" name="title">
                 </div>
 
                 <div class="form-group">
                     <label for="description"> Description </label>
-                    <textarea class="form-control" id="description" required [(ngModel)]="newJoke.description" name="description"></textarea>
+                    <textarea class="form-control" id="description" required [(ngModel)]="activeJoke.description" name="description"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="date"> Date </label>
-                    <input type="date" class="form-control" id="date" required [(ngModel)]="newJoke.date" name="date">
+                    <input type="date" class="form-control" id="date" required [(ngModel)]="activeJoke.date" name="date">
                 </div>
 
                 <div class="form-group:">
                     <label for="count"> Count </label>
-                    <input type="number" class="form-control" id="count" required [(ngModel)]="newJoke.count" name="count">
+                    <input type="number" class="form-control" id="count" required [(ngModel)]="activeJoke.count" name="count">
                 </div>
 
                 <div class="form-group">
                     <label for="reference"> Reference </label>
-                    <input type="text" class="form-control" id="reference" required [(ngModel)]="newJoke.reference" name="reference">
+                    <input type="text" class="form-control" id="reference" required [(ngModel)]="activeJoke.reference" name="reference">
                 </div>
 
                 <div class="form-group">
                     <label for="referenceDetails"> Reference Details </label>
-                    <input type="text" class="form-control" id="referenceDetails" name="referenceDetails" required [(ngModel)]="newJoke.referenceDetails">
+                    <input type="text" class="form-control" id="referenceDetails" name="referenceDetails" required [(ngModel)]="activeJoke.referenceDetails">
                 </div>
 
                 <br>
 
                 <div class="form-group">
                     <label for="asset"> Has Assets? </label>
-                    <select [(ngModel)]="newJoke.hasAsset" name="asset">
+                    <select [(ngModel)]="activeJoke.hasAsset" name="asset">
                         <option value=true>Yes </option>
                         <option selected value=false> No </option>
                     </select>
                 </div>
 
-            <button class="waves-effect waves-light btn" type="submit" (click)="addJokeToDB()"> Submit </button>
-
+            <button *ngIf="create" class="waves-effect waves-light btn" type="submit" (click)="addJokeToDB()"> Submit </button>
+            <button *ngIf="editing" class="waves-effect waves-light btn" type="submit" (click)="saveChanges()"> Save Changes </button>
+            <button class="waves-effect waves-light btn" type="submit" (click)="back()"> Back </button>
+            
         </form>
+
     </div>
 
+<!-- functionality to add assets...not currently using 
     <div class="col-md-3">
 
         <h3>Select files</h3>
@@ -108,68 +126,6 @@
             </tbody>
             </table>
                       
-        </div>
-
-    </clr-tab-content>
-    <clr-tab-content>
-        <div class="container">
-            <h1> Weekly Summary Form </h1>
-            <form>
-                <div class="form-group">
-                    <label for="description1"> News 1 Description </label>
-                    <textarea class="form-control" id="description1" required [(ngModel)]="description1" name="description1"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="reference1"> News 1 Reference </label>
-                    <input type="text" class="form-control" id="reference1" required [(ngModel)]="reference1" name="reference1">
-                </div>
-
-                <div class="form-group">
-                    <label for="description2"> News 2 Description </label>
-                    <textarea class="form-control" id="description2" required [(ngModel)]="description2" name="description2"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="reference2"> News 2 Reference </label>
-                    <input type="text" class="form-control" id="reference2" required [(ngModel)]="reference2" name="reference2">
-                </div>
-
-                <div class="form-group">
-                    <label for="description3"> News 3 Description </label>
-                    <textarea class="form-control" id="description3" required [(ngModel)]="description3" name="description3"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="reference3"> News 3 Reference </label>
-                    <input type="text" class="form-control" id="reference3" required [(ngModel)]="reference3" name="reference3">
-                </div>
-
-                <div class="form-group">
-                    <label for="description4"> News 4 Description </label>
-                    <textarea class="form-control" id="description4" required [(ngModel)]="description4" name="description4"></textarea>
-                </div>
-
-                 <div class="form-group">
-                    <label for="reference4"> News 4 Reference </label>
-                    <input type="text" class="form-control" id="reference4" required [(ngModel)]="reference4" name="reference4">
-                </div>
-
-                <div class="form-group">
-                    <label for="description5"> News 5 Description </label>
-                    <textarea class="form-control" id="description5" required [(ngModel)]="description5" name="description5"></textarea>
-                </div>
-
-                 <div class="form-group">
-                    <label for="reference5"> News 5 Reference </label>
-                    <input type="text" class="form-control" id="reference5" required [(ngModel)]="reference5" name="reference5">
-                </div>
-
-            <button class="waves-effect waves-light btn" type="submit" (click)="addSummaryToDB()"> Submit </button>
-
-        </form>
-    </div>
-    </clr-tab-content>
-</clr-tabs>
+        </div>-->
 </div>
 
