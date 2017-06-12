@@ -48,21 +48,24 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {
     let jokeKey
     let passedData;
-    this.today = new Date();
 
     //if routed from archives site, there will be a passed paramter
     this.sub = this.route.params.subscribe(params => {
       passedData = params['date'];
-      passedData ? jokeKey = passedData : jokeKey = this.jokeService.formatDate(this.today);
+      passedData ? jokeKey = passedData : jokeKey = new Date();
     });
 
     //if weekend, set joke to previous Friday
-    if (this.today.getDay() === 6) {
+    if (new Date().getDay() === 6) {
       this.isWeekend = true;
-      jokeKey = new Date().setDate(this.today.getDay() - 1);
-    } else if (this.today.getDay() === 0) {
+      let jokeDay = new Date();
+      jokeDay.setDate(jokeDay.getDate() - 1)
+      jokeKey = jokeDay;
+    } else if (new Date().getDay() === 0) {
       this.isWeekend = true;
-      jokeKey = new Date().setDate(this.today.getDay() - 2);
+      let jokeDay = new Date();
+      jokeDay.setDate(jokeDay.getDate() - 2);
+      jokeKey = jokeDay;
     }
 
     //load data
@@ -74,6 +77,7 @@ export class HomePageComponent implements OnInit {
   }
   
   private loadDailyJoke(jokeKey) {    
+    jokeKey = this.jokeService.formatDate(jokeKey);
     //get joke object and bind
     this.jokeService.getDailyJoke(jokeKey).subscribe(data => {
       this.jokeToday = data;
