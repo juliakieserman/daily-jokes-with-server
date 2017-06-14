@@ -22,9 +22,6 @@ export class HomePageComponent implements OnInit {
   private sub: any;
   private assets: string[];//holds assets for joke (if any)
 
-  // NEW STUFF HERE
-  today;
-
   /* rating variables */
   public max: number = 5;
   public rate: number = 5;
@@ -81,9 +78,12 @@ export class HomePageComponent implements OnInit {
     //get joke object and bind
     this.jokeService.getDailyJoke(jokeKey).subscribe(data => {
       this.jokeToday = data;
-      let dateString = this.jokeService.formatDate(this.today);
+
+      let dateString = this.jokeService.formatDate(new Date());
       //does not have future joke if it is today or a friday
       dateString === this.jokeToday.date || this.isWeekend ? this.hasFuture = false : this.hasFuture = true;
+      console.log('has future is');
+      console.log(this.hasFuture);
     
       //load assets, if applicable
       if (this.jokeToday.hasAsset === true) {
