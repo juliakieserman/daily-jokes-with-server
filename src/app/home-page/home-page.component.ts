@@ -20,6 +20,7 @@ export class HomePageComponent implements OnInit {
   private jokeToday: JokeObj; //joke to be displayed on page
   private jokeRatings: FirebaseListObservable<any>; //ratings
   private sub: any;
+  passedData;
   private assets: string[];//holds assets for joke (if any)
 
   /* rating variables */
@@ -44,26 +45,30 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     let jokeKey
-    let passedData;
 
     //if routed from archives site, there will be a passed paramter
     this.sub = this.route.params.subscribe(params => {
-      passedData = params['date'];
-      passedData ? jokeKey = passedData : jokeKey = new Date();
+      console.log('there should be a passed parameter');
+      console.log(params['date']);
+      this.passedData = params['date'];
+      this.passedData ? jokeKey = this.passedData : jokeKey = new Date();
     });
 
-    //if weekend, set joke to previous Friday
-    if (new Date().getDay() === 6) {
-      this.isWeekend = true;
-      let jokeDay = new Date();
-      jokeDay.setDate(jokeDay.getDate() - 1)
-      jokeKey = jokeDay;
-    } else if (new Date().getDay() === 0) {
-      this.isWeekend = true;
-      let jokeDay = new Date();
-      jokeDay.setDate(jokeDay.getDate() - 2);
-      jokeKey = jokeDay;
+    if (this.passedData === undefined) {
+        //if weekend, set joke to previous Friday
+      if (new Date().getDay() === 6) {
+        this.isWeekend = true;
+        let jokeDay = new Date();
+        jokeDay.setDate(jokeDay.getDate() - 1)
+        jokeKey = jokeDay;
+      } else if (new Date().getDay() === 0) {
+        this.isWeekend = true;
+        let jokeDay = new Date();
+        jokeDay.setDate(jokeDay.getDate() - 2);
+        jokeKey = jokeDay;
+      }
     }
+  
 
     //load data
     this.loadDailyJoke(jokeKey);
@@ -74,7 +79,9 @@ export class HomePageComponent implements OnInit {
   }
   
   private loadDailyJoke(jokeKey) {    
-    jokeKey = this.jokeService.formatDate(jokeKey);
+    if(this.passedData === undefined) {
+      jokeKey = this.jokeService.formatDate(jokeKey);
+    } 
     //get joke object and bind
     this.jokeService.getDailyJoke(jokeKey).subscribe(data => {
       this.jokeToday = data;
